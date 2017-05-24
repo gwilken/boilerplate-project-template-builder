@@ -1,0 +1,27 @@
+{
+  "name": "boilerplate",
+  "version": "0.0.1",
+  "description": "A templating app that creates boilerplate code for a variety of commonly used frameworks. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gwilken/boilerplate.git"
+  },
+  "author": "G. Wilken, Max Wibert, Brandon Stiles",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gwilken/boilerplate/issues"
+  },
+  "homepage": "https://github.com/gwilken/boilerplate#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "express-handlebars": "^3.0.0",
+    "fs-extra": "^3.0.1",
+    "mysql": "^2.13.0",
+    "sequelize": "^3.30.4"
+  }
+}
