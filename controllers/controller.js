@@ -1,3 +1,4 @@
+
 var db = require("../models");
 
 var router = function(app){
@@ -125,3 +126,4 @@ var router = function(app){
 }
 
 module.exports = router;
+
