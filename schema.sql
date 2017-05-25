@@ -1,3 +1,4 @@
+
 CREATE DATABASE boilerplate_db;
 
 USE boilerplate_db;
