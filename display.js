@@ -15,6 +15,7 @@ $(document).ready(function() {
     var inputCount = 0;
     var roadmap = {};
     var panelToggle = true;
+    var allForms = [];
 
     $('.tiers').hide();
     $('.post-container').hide();
@@ -25,15 +26,11 @@ $(document).ready(function() {
         start();
     })
 
-    /*var panel = $('<div>').attr('class', 'panel panel-primary');
-    var panelHead = $('<div>').attr('class', 'panel-heading');
-    var panelBody = $('<div>').attr('class', 'panel-body');*/
 
     function start() {
         var newPanel = $('<div>').attr('class', 'tier panel panel-primary');
         var panelHead = $('<div>').attr('class', 'panel-heading').html('Begin');
         var panelBody = $('<div>').attr('class', 'panel-body');
-        var nextButton = $('<button>').attr('class', 'next btn btn-default').html('Next');
         var form = $('<form>');
         for (var i = 0; i < library.start.length; i++) {
             var option = $('<input>').attr('type', 'checkbox').attr('id', inputCount).attr('class', 'checkbox').attr('name', i).attr('value', library.start[i]);
@@ -41,21 +38,27 @@ $(document).ready(function() {
             form.append(option).append(optionLabel);
             inputCount++;
         }
-        form.append(nextButton);
         panelBody.append(form);
         newPanel.append(panelHead).append(panelBody);
         $('.tiers').append(newPanel);
 
     }
 
-    $(document).on('click', '.next', function(event) {
-        event.preventDefault();
+    $(document).on('change', 'form', function() {
+
+        $('.download').remove();
         var toggle = false;
+        roadmap = {};
+        $(this).parent().parent().nextAll().remove();
 
-        $('.next').attr("disabled","disabled");
-        var formResults = $(this).parent().serializeArray();
-
+        var formResults = $(this).serializeArray();
         console.log(formResults);
+
+        var allForms = $('form').serializeArray();
+        for (var i = 0; i < allForms.length; i++) {
+            roadmap[allForms[i].value.toLowerCase()] = true;
+        }
+        console.log(roadmap);
 
         var newPanel = $('<div>').attr('class', 'tier panel panel-primary');
         var panelHead = $('<div>').attr('class', 'panel-heading').html('Options');
@@ -82,22 +85,26 @@ $(document).ready(function() {
                 }
             }
         }
+
         if (roadmap['html'] != undefined || roadmap['csscdn'] != undefined || roadmap['node'] != undefined || roadmap['database'] != undefined) {
             $('.post-container').show();
         }
-        console.log(roadmap);
 
         if (toggle === true) {
-            form.append(nextButton);
+
             panelBody.append(form);
             newPanel.append(panelHead).append(panelBody);
             $('.tiers').append(newPanel);
         } else {
+            if ($('.download').length === 0 ) {
             $(this).parent().append('<img class="download submit" src="download.png">');
         }
+        }
+
     })
 
-    $(document).on('click', '.submit', function() {
+    $(document).on('click', '.submit', function(event) {
+        event.preventDefault();
         $.post('/', roadmap).done(function() {
             console.log('Success');
         })
