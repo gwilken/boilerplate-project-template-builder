@@ -1,6 +1,7 @@
 html, body {
     width: 100%;
-    background-color: ivory;
+    background-color: snow;
+    font-family: 'Poppins', sans-serif;
 }
 
 .nav {
@@ -17,7 +18,10 @@ html, body {
 }
 
 .container {
-    margin-top: 50px;
+    padding: 50px 0;
+    position: relative;
+    min-height: 100%;
+
 }
 
 .intro {
@@ -38,20 +42,34 @@ html, body {
     height: 100px;
     width: 200px;
     border-radius: 5%;
+    font-weight: bold;
 }
 
 .panel {
     margin: 0 5px;
 }
 
+.panel-primary > .panel-heading {
+  background-color: #607D8B;
+}
+
+.panel-body {
+    text-align: center;
+}
+
 .option {
     display: block;
     width: 100%;
     margin: 3px;
+    background-color: lightsteelblue;
+}
+
+.option:hover {
+    background-color: #607D8B;
 }
 
 .checkbox:checked + label {
-  background-color: darkblue;
+  background-color: orange;
 }
 
 input[type=checkbox] {
@@ -60,4 +78,43 @@ input[type=checkbox] {
 
 .next {
     margin: 10px auto;
+}
+
+.download {
+    width: 35px;
+    height: auto;
+    border: 1px solid slategray;
+    border-radius: 5%;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.download:hover {
+    cursor: pointer;
+}
+
+@keyframes glowing {
+  0% { background-color: #4682B4; box-shadow: 0 0 3px #4682B4; }
+  50% { background-color: #4169E1; box-shadow: 0 0 40px #4169E1; }
+  100% { background-color: #4682B4; box-shadow: 0 0 3px #4682B4; }
+}
+
+.dl {
+  animation: glowing 1500ms infinite;
+}
+
+.post-container {
+    margin-top: 100px;
+    text-align: center;
+}
+
+.submit-container {
+    position: absolute;
+    right: 20px;
+    bottom: 100px;
+    display: inline-block;
+}
+
+.btn {
+    font-family: 'Poppins', sans-serif;
 }
