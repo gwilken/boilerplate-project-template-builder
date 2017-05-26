@@ -16,7 +16,6 @@ module.exports = function(sequelize, DataTypes)	{
 			allowNull: true
 		}
 	}, {
-		timestamps: false,
 		classMethods: {
 			associate: function(models){
 				Bundle.hasMany(models.Snippet, {

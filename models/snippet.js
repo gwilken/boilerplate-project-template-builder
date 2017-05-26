@@ -27,7 +27,6 @@ module.exports = function(sequelize, DataTypes) {
 			allowNull: false
 		}
 	}, {
-		timestamps: false,
 		classMethods: {
 			associate: function(models){
 				Snippet.belongsTo(models.Bundle, {

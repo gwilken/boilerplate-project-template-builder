@@ -7,7 +7,16 @@ var router = function(app){
 		}).then(dbBundle=>res.json(dbBundle));
 	});
 
-	app.get("/api/bundles/:id", (req, res)=>{
+	app.get("/api/bundles/name/:name", (req,res)=>{
+		db.Bundle.findOne({
+			include: [db.Snippet],
+			where: {
+				name: req.params.name
+			}
+		}).then(dbBundle=>{res.json(dbBundle)})
+	});
+
+	app.get("/api/bundles/id/:id", (req, res)=>{
 		db.Bundle.findOne({
 			include: [db.Snippet],
 			where: {
@@ -22,7 +31,7 @@ var router = function(app){
 		});
 	});
 
-	app.get("/api/dependency/:id", (req, res)=>{
+	app.get("/api/dependency/id/:id", (req, res)=>{
 		db.Bundle.findAll({
 			include: [db.Snippet],
 			where: {
@@ -41,7 +50,7 @@ var router = function(app){
 		});
 	});
 
-	app.delete("/api/bundles/:id", (req, res)=>{
+	app.delete("/api/bundles/id/:id", (req, res)=>{
 		db.Bundle.destroy({
 			where: {
 				id: req.params.id
@@ -67,7 +76,7 @@ var router = function(app){
 		}).then(dbSnippet=>res.json(dbSnippet));
 	});
 
-	app.get("/api/snippets/:id", (req, res)=>{
+	app.get("/api/snippets/id/:id", (req, res)=>{
 		db.Snippet.findOne({
 			include: [db.Bundle],
 			where: {
@@ -92,7 +101,7 @@ var router = function(app){
 		});
 	});
 
-	app.delete("/api/snippets/:id", (req, res)=>{
+	app.delete("/api/snippets/id/:id", (req, res)=>{
 		db.Snippet.destroy({
 			where: {
 				id: req.params.id
@@ -122,6 +131,8 @@ var router = function(app){
 			});
 		}
 	);
+
+
 }
 
 module.exports = router;
