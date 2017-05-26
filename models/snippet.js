@@ -1,10 +1,15 @@
 module.exports = function(sequelize, DataTypes) {
+
 	var Snippet = sequelize.define("Snippet", {
 		id: {
 			type: DataTypes.INTEGER,
 			autoIncrement: true,
 			allowNull: false,
 			primaryKey: true
+		},
+		type: {
+			type: DataTypes.STRING,
+			allowNull: false,
 		},
 		name: {
 			type: DataTypes.STRING,
@@ -26,7 +31,8 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.STRING,
 			allowNull: false
 		}
-	}, {
+	},
+	{
 		timestamps: false,
 		classMethods: {
 			associate: function(models){
@@ -38,5 +44,6 @@ module.exports = function(sequelize, DataTypes) {
 			}
 		}
 	});
+
 	return Snippet;
 }

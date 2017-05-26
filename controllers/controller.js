@@ -1,5 +1,6 @@
 
 var db = require("../models");
+var template = require("./template.js");
 
 var router = function(app){
 	app.get("/api/bundles", (req, res)=>{
@@ -9,6 +10,7 @@ var router = function(app){
 	});
 
 	app.get("/api/bundles/:id", (req, res)=>{
+
 		db.Bundle.findOne({
 			include: [db.Snippet],
 			where: {
@@ -33,6 +35,7 @@ var router = function(app){
 	});
 
 	app.post("/api/bundles", (req, res)=>{
+
 		db.Bundle.create(req.body).then(dbBundle=> {
 			console.log(dbBundle);
 			res.json(dbBundle);
@@ -93,6 +96,8 @@ var router = function(app){
 		});
 	});
 
+
+
 	app.delete("/api/snippets/:id", (req, res)=>{
 		db.Snippet.destroy({
 			where: {
@@ -126,4 +131,3 @@ var router = function(app){
 }
 
 module.exports = router;
-

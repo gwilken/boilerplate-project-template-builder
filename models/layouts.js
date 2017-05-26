@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes)	{
 
-	var Bundle = sequelize.define("Bundle", {
+	var Layout = sequelize.define("Layout", {
 
 		id: {
 			type: DataTypes.INTEGER,
@@ -13,21 +13,14 @@ module.exports = function(sequelize, DataTypes)	{
 			allowNull: false,
 			unique: true
 		},
-		dependency_id: {
-			type: DataTypes.STRING,
+		text: {
+			type: DataTypes.TEXT,
 			allowNull: true
 		}
 	}, {
-		timestamps: false,
-		classMethods: {
-			associate: function(models){
-				Bundle.hasMany(models.Snippet, {
-					onDelete: "cascade"
-				});
-			}
-		}
-	});
+		timestamps: false
+		});
 
-	return Bundle;
+	return Layout;
 
 }
