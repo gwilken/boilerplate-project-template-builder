@@ -18,6 +18,7 @@ $(document).ready(function() {
     var allForms = [];
 
     $('.tiers').hide();
+    $('.preview').hide();
     $('.post-container').hide();
 
     $(document).on('click', '.create', function() {
@@ -56,7 +57,7 @@ $(document).ready(function() {
 
         var allForms = $('form').serializeArray();
         for (var i = 0; i < allForms.length; i++) {
-            roadmap[allForms[i].value.toLowerCase()] = true;
+            roadmap[allForms[i].value.toLowerCase().replace(/\s/g, '')] = true;
         }
         console.log(roadmap);
 
@@ -95,22 +96,47 @@ $(document).ready(function() {
             panelBody.append(form);
             newPanel.append(panelHead).append(panelBody);
             $('.tiers').append(newPanel);
+        } else if (formResults.length === 0) {
+            return;
         } else {
-            if ($('.download').length === 0 ) {
-            $(this).parent().append('<img class="download submit" src="download.png">');
-        }
+            $(this).append('<img class="download submit-button" src="download.png">');
         }
 
     })
 
-    $(document).on('click', '.submit', function(event) {
+    $(document).on('click', '.preview-button', function() {
+        $('.preview').toggle();
+        $.get('/', roadmap).done(function() {
+            console.log('Success');
+        })
+    })
+
+    $(document).on('click', '.submit-button', function(event) {
         event.preventDefault();
         $.post('/', roadmap).done(function() {
             console.log('Success');
         })
     })
 
+    //LOGINS
 
+    $(document).on('click', '.login1', function() {
+        var email = $('.email1').val();
+        var pw = $('.password1').val();
+        var login = [email, pw];
+        $.post('/login', login).done(function() {
+            console.log('Success');
+        })
+    })
+
+    $(document).on('click', '.login2', function() {
+        var email = $('.email2').val();
+        var pw = $('.password2').val();
+        var login = [email, pw];
+        $.post('/login', login).done(function() {
+            console.log('Success');
+        })
+    })
 
 
 
