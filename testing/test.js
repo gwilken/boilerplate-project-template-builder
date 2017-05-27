@@ -3,7 +3,8 @@ var db = require('../models');
 
 var obj = {
       bootstrap: true,
-      mdl: true
+      mdl: true,
+      somejs: true
     }
 
 var args = builder.parseOptions(obj);
@@ -11,47 +12,61 @@ var args = builder.parseOptions(obj);
 console.log(args);
 
 
-var workingTemplates = {};
 
-function get() {
 
-  db.Snippet.findOne({
-    where: {
-      name: args[0]
-    }
-  }).then(function(snippet) {
+function build(arr, callback) {
 
-    var template = snippet.dataValues.template;
+  var workingTemplates = {};
+  var count = 0;
 
-    db.Template.findOne({
+  arr.forEach(function(element) {
+
+    db.Snippet.findOne({
       where: {
-        name: template
+        name: element
       }
-    }).then(function(data) {
+    }).then(function(snippet) {
 
-      if(!workingTemplates[template]) {
+      var template = snippet.dataValues.template;
 
-        workingTemplates[template] = data.dataValues.text
+      db.Template.findOne({
+        where: {
+          name: template
+        }
+      }).then(function(data) {
 
-      }
+        if(!workingTemplates[template]) {
 
-      //console.log(workingTemplates);
+          workingTemplates[template] = data.dataValues.text
 
-      builder.replace(workingTemplates[template], snippet.dataValues.marker, snippet.dataValues.snippet_text, function(str) {
+        }
 
-        workingTemplates[template] = str;
+        builder.replace(workingTemplates[template], snippet.dataValues.marker, snippet.dataValues.snippet_text, function(str) {
 
-          console.log(workingTemplates[template]);
+          workingTemplates[template] = str;
+
+          count++;
+
+          if(count === arr.length ) {
+
+            //callback(workingTemplates);
+
+            console.log(workingTemplates[template]);
+          }
+
+          })
 
         })
 
       })
 
-    })
+  }) //foreach
 
-  }
+}
 
-get();
+build(args, function(obj) {
+  console.log(obj);
+});
 
 
 
