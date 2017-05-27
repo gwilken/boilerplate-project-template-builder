@@ -6,7 +6,6 @@ var builder = {
   userOptions: [],
 
   parseOptions: function(obj, cb) {
-
       for(var key in obj) {
         this.userOptions.push(key);
 
@@ -14,27 +13,86 @@ var builder = {
               this.parseOptions( obj[key] );
           }
       }
-
     return this.userOptions;
-
   },
 
-  scrubMarkers: function(buffer, cb) {
+  build: function(arr, cb) {
+    var workingTemplates = {};
+    var count = 0;
 
+    arr.forEach(function(element) {
+
+      db.Snippet.findOne({
+        where: {
+          name: element
+        }
+      }).then(function(snippet) {
+
+        var template = snippet.dataValues.template;
+
+        db.Template.findOne({
+          where: {
+            name: template
+          }
+        }).then(function(data) {
+
+          if(!workingTemplates[template]) {
+
+            workingTemplates[template] = data.dataValues.text
+
+          }
+
+          builder.replace(workingTemplates[template], snippet.dataValues.marker, snippet.dataValues.snippet_text, function(str) {
+
+            workingTemplates[template] = str;
+
+            count++;
+
+            if(count === arr.length ) {
+
+              cb(workingTemplates);
+
+            }
+          })
+        })
+      })
+    }) //foreach
+  },
+
+  replaceOptions: function(templates, options, cb) {
+     for(var templateKey in templates) {
+
+       for(var optionsKey in options)
+
+        if(templateKey === optionsKey) {
+
+            builder.replace(templates[templateKey], options[optionsKey].markers[0], options[optionsKey].strings[0], function(res) {
+
+              templates[templateKey] = res;
+
+            })
+        }
+     }
+     cb( templates );
+   },
+
+  scrubMarkers: function(buffer, cb) {
     var re = new RegExp( '{--[a-zA-Z\d\s]*--}', 'g' );
 
-    while (re.test(buffer)) {
+    for(var keys in buffer) {
 
-      buffer = buffer.replace(re, '');
+      while (re.test(buffer[keys])) {
 
-    };
+        buffer[keys] = buffer[keys].replace(re, '');
+
+      };
+
+    }
 
     cb(buffer);
-
   },
 
   replace: function(buffer, marker, string, cb){
-
     var re = new RegExp(marker, 'i');
 
     var res = buffer.replace(re, string + marker);
@@ -43,11 +101,9 @@ var builder = {
   },
 
   beautify: function(text, cb) {
-
   },
 
   getTemplate: function(name, cb) {
-
     db.Template.findOne({
       where: {
         name: name
@@ -55,12 +111,10 @@ var builder = {
     }).then(template => {
 
       cb(template);
-
     });
   },
 
   getSnippets: function(type, cb) {
-
     db.Snippet.findAll({
       where: {
         type: type
@@ -68,11 +122,8 @@ var builder = {
     }).then(dbBundle => {
 
       cb(dbBundle);
-
     });
-
   }
-
 };
 
 module.exports = builder;

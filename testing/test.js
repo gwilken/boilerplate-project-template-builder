@@ -9,149 +9,25 @@ var obj = {
       express: true
     };
 
+var options = {
+      html: {
+          markers: ['{--title--}', '{--comment--}'],
+          strings: ['test title biatch', 'comment added']
+        }
+      };
+
 
 var args = builder.parseOptions(obj);
 
 
-//console.log(args);
+builder.build(args, function(templates) {
 
+  builder.replaceOptions(templates, options, function(data) {
 
-function build(arr, callback) {
-
-  var workingTemplates = {};
-  var count = 0;
-
-  arr.forEach(function(element) {
-
-    db.Snippet.findOne({
-      where: {
-        name: element
-      }
-    }).then(function(snippet) {
-
-      var template = snippet.dataValues.template;
-
-      db.Template.findOne({
-        where: {
-          name: template
-        }
-      }).then(function(data) {
-
-        if(!workingTemplates[template]) {
-
-          workingTemplates[template] = data.dataValues.text
-
-        }
-
-        builder.replace(workingTemplates[template], snippet.dataValues.marker, snippet.dataValues.snippet_text, function(str) {
-
-          workingTemplates[template] = str;
-
-          count++;
-
-          if(count === arr.length ) {
-
-            callback(workingTemplates);
-
-            //console.log(beautify(workingTemplates[template]));
-          }
-
-          })
-
-        })
-
-      })
-
-  }) //foreach
-
-}
-
-
-var options = {
-
-  html: {
-      markers: ['{--title--}', '{--comment--}'],
-      strings: ['test title biatch', 'comment added']
-    }
-  };
-
-
- build(args, function(templates) {
-
-  // console.log( obj );
-
-   for(var templateKey in templates) {
-    // console.log(templateKey);
-
-     for(var optionsKey in options)
-
-      if(templateKey === optionsKey) {
-
-          builder.replace(templates[templateKey], options[optionsKey].markers[0], options[optionsKey].strings[0], function(res) {
-
-            console.log(res);
-
-          })
-      }
-   }
- });
-
-
-
-
-function keys() {
-
-  for(var key in options) {
-    console.log(key);
-
-    if(typeof options[key] === 'object') {}
-
-  }
-
-}
-
-//keys();
-
-
-
-
-
-
-function callback(buff) {
-
-  builder.scrubMarkers(buff, function(res) {
+    builder.scrubMarkers(data, function(res) {
 
       console.log(res);
 
-  });
-}
-
-
-
-
-function go() {
-
-    builder.getSnippets(element, function(snippets) {
-
-      builder.getTemplate('html', function(template) {
-
-        var buffer = template.dataValues.text
-        var counter = 0;
-
-        snippets.forEach(function(snippet) {
-
-          builder.replace(buffer, snippet.dataValues.marker, snippet.dataValues.snippet_text, function(str) {
-
-            buffer = str;
-            counter++;
-
-            if(counter === snippets.length) {
-
-              callback(buffer);
-
-            }
-          })
-        })
-      })
     })
-}
+  })
+})
