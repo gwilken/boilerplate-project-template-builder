@@ -33,11 +33,11 @@ var builder = {
 
   },
 
-  replace: function(layout, marker, string, cb){
+  replace: function(buffer, marker, string, cb){
 
     var re = new RegExp(marker, 'i');
 
-    var res = layout.replace(re, string + marker);
+    var res = buffer.replace(re, string + marker);
 
     cb(res);
   },

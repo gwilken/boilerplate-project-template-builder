@@ -1,17 +1,19 @@
 var builder = require('../controllers/builder.js');
 var db = require('../models');
+var beautify = require('js-beautify').html;
 
 var obj = {
       bootstrap: true,
       mdl: true,
-      somejs: true
-    }
+      somejs: true,
+      express: true
+    };
+
 
 var args = builder.parseOptions(obj);
 
-console.log(args);
 
-
+//console.log(args);
 
 
 function build(arr, callback) {
@@ -49,9 +51,9 @@ function build(arr, callback) {
 
           if(count === arr.length ) {
 
-            //callback(workingTemplates);
+            callback(workingTemplates);
 
-            console.log(workingTemplates[template]);
+            //console.log(beautify(workingTemplates[template]));
           }
 
           })
@@ -64,12 +66,51 @@ function build(arr, callback) {
 
 }
 
-build(args, function(obj) {
-  console.log(obj);
-});
+
+var options = {
+
+  html: {
+      markers: ['{--title--}', '{--comment--}'],
+      strings: ['test title biatch', 'comment added']
+    }
+  };
+
+
+ build(args, function(templates) {
+
+  // console.log( obj );
+
+   for(var templateKey in templates) {
+    // console.log(templateKey);
+
+     for(var optionsKey in options)
+
+      if(templateKey === optionsKey) {
+
+          builder.replace(templates[templateKey], options[optionsKey].markers[0], options[optionsKey].strings[0], function(res) {
+
+            console.log(res);
+
+          })
+      }
+   }
+ });
 
 
 
+
+function keys() {
+
+  for(var key in options) {
+    console.log(key);
+
+    if(typeof options[key] === 'object') {}
+
+  }
+
+}
+
+//keys();
 
 
 
