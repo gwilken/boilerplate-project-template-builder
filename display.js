@@ -57,7 +57,7 @@ $(document).ready(function() {
 
         var allForms = $('form').serializeArray();
         for (var i = 0; i < allForms.length; i++) {
-            roadmap[allForms[i].value.toLowerCase()] = true;
+            roadmap[allForms[i].value.toLowerCase().replace(/\s/g, '')] = true;
         }
         console.log(roadmap);
 
@@ -118,7 +118,25 @@ $(document).ready(function() {
         })
     })
 
+    //LOGINS
 
+    $(document).on('click', '.login1', function() {
+        var email = $('.email1').val();
+        var pw = $('.password1').val();
+        var login = [email, pw];
+        $.post('/login', login).done(function() {
+            console.log('Success');
+        })
+    })
+
+    $(document).on('click', '.login2', function() {
+        var email = $('.email2').val();
+        var pw = $('.password2').val();
+        var login = [email, pw];
+        $.post('/login', login).done(function() {
+            console.log('Success');
+        })
+    })
 
 
 

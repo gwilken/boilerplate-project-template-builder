@@ -142,3 +142,7 @@ input[type=checkbox] {
     color: slategray;
     padding: 0 5px;
 }
+
+.mdl-layout__drawer .mdl-textfield {
+    padding-left: 30px;
+}
