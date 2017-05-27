@@ -19,13 +19,20 @@
             <header class="nav mdl-layout__header">
                 <div class="mdl-layout__header-row">
                     <!-- Title -->
-                    <span class="nav-title mdl-layout-title"><img class='logo' src='boilerplate-logo1.png'></span>
+                    <a href=''><span class="nav-title mdl-layout-title"><img class='logo' src='boilerplate-logo.png'></span></a>
                     <!-- Add spacer, to align navigation to the right -->
                     <div class="mdl-layout-spacer"></div>
                     <!-- Navigation. We hide it in small screens. -->
                     <nav class="mdl-navigation mdl-layout--large-screen-only">
-                        <a class="mdl-navigation__link" href="">Home</a>
-                        <a class="mdl-navigation__link" href="">Log In</a>
+                        <div class="mdl-textfield">
+                            <span>Email</span><br>
+                            <input class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp">
+                        </div>
+                        <div class="mdl-textfield">
+                            <span>Password</span><br>
+                            <input class="mdl-textfield__input" type="password" name="sample" id="fixed-header-drawer-exp">
+                        </div>
+                        <a class="mdl-navigation__link" href="#">Log In</a>
                     </nav>
                 </div>
             </header>
@@ -33,6 +40,14 @@
                 <span class="mdl-layout-title">BOILERPLATE</span>
                 <nav class="mdl-navigation">
                     <a class="mdl-navigation__link" href="">Home</a>
+                    <div class="mdl-textfield">
+                        <span>Email</span><br>
+                        <input class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp">
+                    </div>
+                    <div class="mdl-textfield">
+                        <span>Password</span><br>
+                        <input class="mdl-textfield__input" type="password" name="sample" id="fixed-header-drawer-exp">
+                    </div>
                     <a class="mdl-navigation__link" href="">Log In</a>
                 </nav>
             </div>
@@ -44,17 +59,18 @@
                 <div class='tiers'>
                 </div>
                 <div class='preview'>
+                    <iframe class='preview-pane'></iframe>
                 </div>
                 <div class='post-container'>
                     <div class='submit-container'>
-                    <button class='submit dl btn btn-primary'>DOWNLOAD</button>
+                        <button class='preview-button btn btn-primary'>PREVIEW</button>
+                        <button class='submit-button dl btn btn-primary'>DOWNLOAD</button>
                     </div>
                 </div>
             </div>
     </body>
 
     <script>
-
     </script>
 
 </html>
