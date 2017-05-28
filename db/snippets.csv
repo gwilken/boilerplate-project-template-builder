@@ -1,0 +1,13 @@
+"id";"name";"type";"marker";"template";"snippet_text"
+1;"bootstrap";"css";"{--style--}";"html";"<link rel=""stylesheet"" href=""https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"" integrity=""sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"" crossorigin=""anonymous"">"
+2;"java";"script";"{--script--}";"html";"<script href=""assets/js/test2.js""></script>"
+4;"somejs";"script";"{--script--}";"html";"<script>http://www.test.com/js.js</script>"
+5;"mdl";"mdl";"{--style--}";"html";"<link rel=""stylesheet"" href=""https://fonts.googleapis.com/icon?family=Material+Icons""><link rel=""stylesheet"" href=""https://code.getmdl.io/1.3.0/material.indigo-pink.min.css"">"
+6;"express";"node";"{--require--}";"node";"const express = require(""express"");"
+8;"express";"node";"{--package--}";"package_json";"""express"": ""^4.15.3"""
+9;"express";"node";"{--nodecode--}";"node";"const app = express();var PORT = 8000;app.get('/', function (req, res) {  res.send('Hello World!')});app.listen(PORT, function () {  console.log('App listening on port,' PORT);});"
+10;"mdl";"mdl";"{--script--}";"html";"<script defer src=""https://code.getmdl.io/1.3.0/material.min.js""></script>"
+11;"jquery";"jquery";"{--script--}";"html";"<script src=""https://code.jquery.com/jquery-3.2.1.min.js"" integrity=""sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=""crossorigin=""anonymous""></script>"
+12;"jquery";"jquery";"{--js--}";"js";"$(document).ready(function() {
+console.log('ready');
+})"
