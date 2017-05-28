@@ -13,11 +13,11 @@ module.exports = function(sequelize, DataTypes)	{
 			allowNull: false,
 			unique: true
 		},
-		// group: {
-		// 	type: DataTypes.STRING,
-		// 	allowNull: false,
-		// 	unique: true
-		// },
+		family: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			unique: false
+		},
 		path: {
 			type: DataTypes.STRING,
 			allowNull: false,

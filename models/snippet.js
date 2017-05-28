@@ -26,14 +26,6 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.TEXT,
 			allowNull: false
 		},
-		directory_path: {
-			type: DataTypes.TEXT,
-			allowNull: false
-		},
-		file_name: {
-			type: DataTypes.TEXT,
-			allowNull: false
-		},
 		marker: {
 			type: DataTypes.STRING,
 			allowNull: false

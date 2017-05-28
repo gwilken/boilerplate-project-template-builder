@@ -1,8 +1,18 @@
 
 var db = require("../models");
-var template = require("./template.js");
+//var template = require("./templates.js");
 
 var router = function(app){
+
+	app.get("/", function(req, res) {
+
+		res.sendFile('index.html', function(err) {
+			if(err) console.log(err);
+				else console.log('ok');
+		})
+
+	});
+
 	app.get("/api/bundles", (req, res)=>{
 		db.Bundle.findAll({
 			include: [db.Snippet]
@@ -87,6 +97,7 @@ var router = function(app){
 	});
 
 	app.post("api/snippets", (req, res)=>{
+
 		db.Snippet.create(req.body).then(dbSnippet=>{
 			console.log(dbSnippet);
 			res.json(dbSnippet);
@@ -94,9 +105,8 @@ var router = function(app){
 			console.error(err);
 			res.json(err);
 		});
+
 	});
-
-
 
 	app.delete("/api/snippets/:id", (req, res)=>{
 		db.Snippet.destroy({

@@ -17,46 +17,44 @@ var builder = {
   },
 
   build: function(arr, cb) {
+
     var workingTemplates = {};
     var count = 0;
 
     arr.forEach(function(element) {
 
-      db.Snippet.findOne({
+      db.Snippet.findAll({
         where: {
           name: element
         }
-      }).then(function(snippet) {
+      }).then(function(snippets) {
 
-        var template = snippet.dataValues.template;
+        snippets.forEach(function(snippet) {
 
-        db.Template.findOne({
-          where: {
-            name: template
-          }
-        }).then(function(data) {
+          var template = snippet.dataValues.template;
 
-          if(!workingTemplates[template]) {
+          db.Template.findOne({
+            where: {
+              name: template
+            }
+          }).then(function(data) {
 
-            workingTemplates[template] = data.dataValues.text
+            if(!workingTemplates[template]) workingTemplates[template] = data.dataValues.text
 
-          }
+            builder.replace(workingTemplates[template], snippet.dataValues.marker, snippet.dataValues.snippet_text, function(str) {
 
-          builder.replace(workingTemplates[template], snippet.dataValues.marker, snippet.dataValues.snippet_text, function(str) {
+              workingTemplates[template] = str;
 
-            workingTemplates[template] = str;
+              if(count === arr.length ) cb(workingTemplates);
+
+            })
 
             count++;
 
-            if(count === arr.length ) {
-
-              cb(workingTemplates);
-
-            }
           })
         })
       })
-    }) //foreach
+    })
   },
 
   replaceOptions: function(templates, options, cb) {
