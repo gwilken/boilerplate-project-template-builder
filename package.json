@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/gwilken/boilerplate#readme",
   "dependencies": {
+    "async": "^2.4.1",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "express-handlebars": "^3.0.0",

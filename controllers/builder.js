@@ -1,5 +1,6 @@
 var fs = require('fs-extra');
 var db = require("../models");
+var async = require('async');
 
 var builder = {
 
@@ -20,8 +21,19 @@ var builder = {
 
     var workingTemplates = {};
     var count = 0;
+    var countLength = 0;
 
-    arr.forEach(function(element) {
+    db.Snippet.count({
+        where: {
+          name: {
+            $in: arr
+          }
+        }
+    }).then(function(data) {
+      countLength = data;
+    })
+
+    async.each(arr, function(element) {
 
       db.Snippet.findAll({
         where: {
@@ -29,7 +41,7 @@ var builder = {
         }
       }).then(function(snippets) {
 
-        snippets.forEach(function(snippet) {
+        async.each(snippets, function(snippet) {
 
           var template = snippet.dataValues.template;
 
@@ -45,16 +57,17 @@ var builder = {
 
               workingTemplates[template] = str;
 
-              if(count === arr.length ) cb(workingTemplates);
+              count++;
 
+              if(count === countLength ) {
+                cb(workingTemplates);
+                return;
+              }
             })
-
-            count++;
-
           })
         })
       })
-    })
+    });
   },
 
   replaceOptions: function(templates, options, cb) {

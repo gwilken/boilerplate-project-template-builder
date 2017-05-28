@@ -3,7 +3,9 @@ var db = require('../models');
 var beautify = require('js-beautify').html;
 
 var obj = {
-      jquery: true
+      mdl: true,
+      jquery: true,
+      express: true
     };
 
 var options = {
@@ -16,15 +18,25 @@ var options = {
 
 var args = builder.parseOptions(obj);
 
+//console.log(args);
 
-builder.build(args, function(templates) {
+builder.build(args, function(data) {
 
-//  builder.replaceOptions(templates, options, function(data) {
-
-    builder.scrubMarkers(templates, function(res) {
-
-      console.log(res);
-
-    })
-//  })
+  console.log('hit');
+  console.log(data);
+  return;
 })
+
+
+//
+// builder.build(args, function(templates) {
+//
+// //  builder.replaceOptions(templates, options, function(data) {
+//
+//     builder.scrubMarkers(templates, function(res) {
+//
+//       console.log(res);
+//
+//     })
+// //  })
+// })
