@@ -3,9 +3,8 @@ var db = require('../models');
 var beautify = require('js-beautify').html;
 
 var obj = {
-      mdl: true,
-      jquery: true,
-      express: true
+      bootstrap: true,
+      jquery: true
     };
 
 var options = {
@@ -18,13 +17,11 @@ var options = {
 
 var args = builder.parseOptions(obj);
 
-//console.log(args);
 
 builder.build(args, function(data) {
 
-  console.log('hit');
   console.log(data);
-  return;
+
 })
 
 
