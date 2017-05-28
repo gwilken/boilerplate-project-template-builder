@@ -12,6 +12,11 @@ $(document).ready(function() {
         database: ['MySql', 'MongoDB']
     }
 
+    var testObj = {
+        html: '<!DOCTYPE html>\n\n<html>\n\t<head>\n\t\t<title> test title biatch{--title--} </title>\n\n\t\t<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link href="http://mdl.com">{--style--}\n\n\t\t<script>http://www.test.com/js.js</script>{--script--}\n\n\t</head>\n\t\n\t<body>\n\n\n\t</body>\n</html>',
+        node: '//test var express=require("express"){--require--}'
+    }
+
     var inputCount = 0;
     var roadmap = {};
     var panelToggle = true;
@@ -105,7 +110,28 @@ $(document).ready(function() {
     })
 
     $(document).on('click', '.preview-button', function() {
+        $('.tiers').toggle();
+
         $('.preview').toggle();
+
+
+        $.each(testObj, function( key, value ) {
+            var newPanel = $('<div>').attr('class', 'preview-box panel panel-primary');
+            var panelHead = $('<div>').attr('class', 'panel-heading');
+            var panelBody = $('<div>').attr('class', 'panel-body');
+            var editor = $('<textarea>');
+
+            panelHead.append(key);
+            editor.text(value);
+            panelBody.append(editor);
+
+            newPanel.append(panelHead).append(panelBody);
+
+            $('.preview-pane').append(newPanel);
+
+
+        })
+
         $.get('/', roadmap).done(function() {
             console.log('Success');
         })
