@@ -1,5 +1,6 @@
 var builder = require('../controllers/builder.js');
 var writer = require('../controllers/writer.js');
+var zipper = require('../controllers/zipper.js');
 
 var db = require('../models');
 var beautify = require('js-beautify').html;
@@ -28,12 +29,17 @@ builder.build(args, function(data) {
 
     builder.beautify(result, function(res) {
 
-        writer.writeFiles(data);
+      writer.writeFiles(data, function() {
 
+        console.log('files written.');
+
+        zipper();
+
+        console.log('files zipped.');
+
+      });
     })
-
   })
-
 })
 
   // builder.beautify(data, function(res) {
