@@ -29,39 +29,20 @@ builder.build(args, function(data) {
 
     builder.beautify(result, function(res) {
 
-      writer.writeFiles(data, function() {
+      // writer.writeFiles(data, function() {
+      //
+      //   console.log('files written.');
+      //
+      //   zipper();
+      //
+      //   console.log('files zipped.');
+      //
+      // });
 
-        console.log('files written.');
-
-        zipper();
-
-        console.log('files zipped.');
-
+      writer.writeZipFile(res, function() {
+        console.log('Zip file written.');
       });
+
     })
   })
 })
-
-  // builder.beautify(data, function(res) {
-  //   console.log(res);
-  // });
-
-//console.log(data);
-
-
-
-
-
-
-//
-// builder.build(args, function(templates) {
-//
-// //  builder.replaceOptions(templates, options, function(data) {
-//
-//     builder.scrubMarkers(templates, function(res) {
-//
-//       console.log(res);
-//
-//     })
-// //  })
-// })
