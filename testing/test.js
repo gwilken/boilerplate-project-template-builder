@@ -4,7 +4,9 @@ var beautify = require('js-beautify').html;
 
 var obj = {
       bootstrap: true,
-      jquery: true
+      jquery: true,
+      express: true,
+      css_reset: true
     };
 
 var options = {
