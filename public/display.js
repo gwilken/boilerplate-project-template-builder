@@ -135,18 +135,24 @@ $(document).ready(function() {
         $('.preview-pane').empty();
         $('.preview').toggle();
 
-        $.each(testObj, function(key, value) {
-            var newPanel = $('<div>').attr('class', 'preview-box panel panel-primary');
-            var panelHead = $('<div>').attr('class', 'panel-heading').html(key);
-            var panelBody = $('<div>').attr('class', 'panel-body');
-            var form = $('<form>').attr('class', 'preview-form');
-            var editor = $('<textarea>').attr('name', key).text(value);
+        $.post('/', roadmap).done(function(data) {
+            console.log('Success');
 
-            panelBody.append(form.append(editor));
-            newPanel.append(panelHead).append(panelBody);
+            $.each(data, function(key, value) {
+                var newPanel = $('<div>').attr('class', 'preview-box panel panel-primary');
+                var panelHead = $('<div>').attr('class', 'panel-heading').html(key);
+                var panelBody = $('<div>').attr('class', 'panel-body');
+                var form = $('<form>').attr('class', 'preview-form');
+                var editor = $('<textarea>').attr('name', key).text(value);
 
-            $('.preview-pane').append(newPanel);
+                panelBody.append(form.append(editor));
+                newPanel.append(panelHead).append(panelBody);
+
+                $('.preview-pane').append(newPanel);
+            })
         })
+
+
     })
 
     $(document).on('click', '.confirm-button', function() {
