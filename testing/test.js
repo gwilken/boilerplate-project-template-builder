@@ -24,15 +24,27 @@ var args = builder.parseOptions(obj);
 
 builder.build(args, function(data) {
 
+  builder.scrubMarkers(data, function(result) {
+
+    builder.beautify(result, function(res) {
+
+        writer.writeFiles(data);
+
+    })
+
+  })
+
+})
+
   // builder.beautify(data, function(res) {
   //   console.log(res);
   // });
 
 //console.log(data);
 
-  writer.writeFiles(data);
 
-})
+
+
 
 
 //
