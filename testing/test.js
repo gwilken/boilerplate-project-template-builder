@@ -22,7 +22,9 @@ var args = builder.parseOptions(obj);
 
 builder.build(args, function(data) {
 
-  console.log(data);
+  builder.beautify(data, function(res) {
+    console.log(res);
+  });
 
 })
 

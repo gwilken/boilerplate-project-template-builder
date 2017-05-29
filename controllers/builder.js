@@ -1,6 +1,9 @@
 var fs = require('fs-extra');
 var db = require("../models");
 var async = require('async');
+var beautify_js = require('js-beautify');
+var beautify_css = require('js-beautify').css;
+var beautify_html = require('js-beautify').html;
 
 var builder = {
 
@@ -111,7 +114,31 @@ var builder = {
     cb(res);
   },
 
-  beautify: function(text, cb) {
+  beautify: function(obj, cb) {
+
+    for(var key in obj) {
+
+      switch(key) {
+
+        case 'html':
+          obj[key] = beautify_html(obj[key]);
+        break;
+
+        case 'css':
+          obj[key] = beautify_css(obj[key]);
+        break;
+
+        case 'js':
+        case 'package_json':
+        case 'node':
+           obj[key] = beautify_js(obj[key]);
+        break;
+
+        default:
+        break;
+      }
+    }
+    cb(obj);
   },
 
   getTemplate: function(name, cb) {
