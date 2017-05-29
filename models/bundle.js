@@ -17,15 +17,9 @@ module.exports = function(sequelize, DataTypes)	{
 			type: DataTypes.STRING,
 			allowNull: true
 		}
-	}, {
-		timestamps: false,
-		classMethods: {
-			associate: function(models){
-				Bundle.hasMany(models.Snippet, {
-					onDelete: "cascade"
-				});
-			}
-		}
+	},
+	{
+		timestamps: false
 	});
 
 	return Bundle;

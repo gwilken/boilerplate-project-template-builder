@@ -37,6 +37,7 @@ $(document).ready(function() {
 
 
     function start() {
+
         var tier = $('<div>').attr('class', 'tier');
         var newPanel = $('<div>').attr('class', 'panel panel-primary');
         var panelHead = $('<div>').attr('class', 'panel-heading').html('Begin');
@@ -52,15 +53,18 @@ $(document).ready(function() {
         tier.append(form);
         $('.tiers').append(tier);
 
+
     }
 
     $(document).on('change', 'form', function() {
 
         $('.download').remove();
         var toggle = false;
+
         categoryArray = [];
         roadmap = {};
         $(this).parent().nextAll().remove();
+
 
         var formResults = $(this).serializeArray();
         console.log(formResults);
@@ -162,7 +166,6 @@ $(document).ready(function() {
             console.log('Success');
         })
     })
-
 
     //LOGINS
 

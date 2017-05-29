@@ -1,127 +1,43 @@
-var template = require('../controllers/template.js');
+var builder = require('../controllers/builder.js');
 var db = require('../models');
-//
-// var body = {
-//
-//   type: 'html',
-//   BundleId: 2,
-//   snippet_text: '<script>http://www.test.com/js.js</script>',
-//   directory_path: '/',
-//   file_name: 'test.js',
-//   marker: '{--script--}',
-//   name: 'java'
-//
-// }
-//
-// db.Snippet.create(body).then(dbSnippet=>{
-//
-//   console.log(dbSnippet);
-//
-// }).catch(err=>{
-//
-//   console.error(err);
-//
-// });
+var beautify = require('js-beautify').html;
+
+var obj = {
+      bootstrap: true,
+      jquery: true,
+      express: true,
+      css_reset: true
+    };
+
+var options = {
+      html: {
+          markers: ['{--title--}', '{--comment--}'],
+          strings: ['test title', 'comment added']
+        }
+      };
 
 
+var args = builder.parseOptions(obj);
 
 
-template.getSnippets('css', function(snips) {
+builder.build(args, function(data) {
 
+  builder.beautify(data, function(res) {
+    console.log(res);
+  });
 
-
-
-  template.getLayout(snips.Snippets[0].dataValues.type, function(layout) {
-
-    console.log(layout.dataValues.text);
-  
-  })
-
-});
-
-
+})
 
 
 //
+// builder.build(args, function(templates) {
 //
-// var obj = {
-//         html: true,
-//         css: {
-//           bootstrap: true
-//         },
-//       node:
-//         {
-//           express: true,
-//           mongo: true,
-//           mysql: {
-//             test: true
-//           }
-//         }
-// }
+// //  builder.replaceOptions(templates, options, function(data) {
 //
-// var arr = [];
+//     builder.scrubMarkers(templates, function(res) {
 //
-// function cleanup(file) {
+//       console.log(res);
 //
-//   var fn = 'index.new';
-//
-//   var re = new RegExp( '{--[a-zA-Z\d\s]*--}', 'g' );
-//
-//   fs.readFile('index.html', 'utf8', function(err, data) {
-//
-//     //console.log(data);
-//
-//     while (re.test(data)) {
-//
-//       data = data.replace(re, '');
-//
-//     }
-//
-//     console.log('replace finished.');
-//
-//   fs.writeFileSync(fn, data, 'utf8');
-//
-//   });
-// }
-
-//
-// function test(obj) {
-//
-//   for(var key in obj) {
-//     arr.push(key);
-//
-//       if (typeof obj[key] === 'object') {
-//           test(obj[key]);
-//       }
-//   }
-//
-//   return(arr);
-//
-// };
-//
-// console.log( test(obj) );
-//
-// var test = "{--style--}";
-//
-// var text = "<link>http://www.bootstcrap.com/cdn/test.css</link>";
-
-// fs.readFile('../templates/html.bpl', 'utf8', function(err, data) {
-//
-//   if(err) console.log(err);
-//
-//   console.log(data);
-//
-//   var re = new RegExp(test, 'i');
-//
-//   var buffer = data;
-//
-//   var res = buffer.replace(re, text+test );
-//
-//   console.log(res);
-//
-//   fs.writeFile('index.html', res, 'utf8', function(err) {
-//     console.log(err);
-//   })
+//     })
+// //  })
 // })
-
-// cleanup('index.html');
