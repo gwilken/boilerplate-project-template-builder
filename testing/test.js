@@ -1,4 +1,6 @@
 var builder = require('../controllers/builder.js');
+var writer = require('../controllers/writer.js');
+
 var db = require('../models');
 var beautify = require('js-beautify').html;
 
@@ -22,9 +24,13 @@ var args = builder.parseOptions(obj);
 
 builder.build(args, function(data) {
 
-  builder.beautify(data, function(res) {
-    console.log(res);
-  });
+  // builder.beautify(data, function(res) {
+  //   console.log(res);
+  // });
+
+//console.log(data);
+
+  writer.writeFiles(data);
 
 })
 

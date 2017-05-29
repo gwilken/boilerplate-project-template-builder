@@ -1,4 +1,4 @@
-var fs = require('fs-extra');
+
 var db = require("../models");
 var async = require('async');
 var beautify_js = require('js-beautify');
