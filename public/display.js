@@ -1,15 +1,23 @@
 $(document).ready(function() {
 
     var library = {
-        start: ['Front', 'Back'],
-        front: ['HTML', 'CSS CDN'],
-        back: ['Node', 'Database'],
-        html: ['CSS', 'JavaScript', 'Vanilla'],
-        csscdn: ['Bootstrap', 'Material Design Lite', 'Skeleton', 'Bulma'],
-        css: ['Reset'],
-        javascript: ['jQuery', 'Empty'],
-        node: ['HTTP', 'Express'],
-        database: ['MySql', 'MongoDB']
+        Front: {
+            front: ['HTML', 'CSS CDN'],
+            html: ['CSS', 'JavaScript', 'Plain/Empty'],
+            csscdn: ['Bootstrap', 'Material Design Lite', 'Skeleton', 'Bulma'],
+            css: ['Reset'],
+            javascript: ['jQuery']
+        },
+        Back: {
+            back: ['Node', 'Database'],
+            node: ['HTTP', 'Express'],
+            database: ['MySql', 'MongoDB']
+        }
+    }
+
+    var testObj = {
+        html: '<!DOCTYPE html>\n\n<html>\n\t<head>\n\t\t<title> test title biatch{--title--} </title>\n\n\t\t<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link href="http://mdl.com">{--style--}\n\n\t\t<script>http://www.test.com/js.js</script>{--script--}\n\n\t</head>\n\t\n\t<body>\n\n\n\t</body>\n</html>',
+        node: '//test var express=require("express"){--require--}'
     }
 
     var inputCount = 0;
@@ -29,19 +37,22 @@ $(document).ready(function() {
 
 
     function start() {
-        var newPanel = $('<div>').attr('class', 'tier panel panel-primary');
+
+        var tier = $('<div>').attr('class', 'tier');
+        var newPanel = $('<div>').attr('class', 'panel panel-primary');
         var panelHead = $('<div>').attr('class', 'panel-heading').html('Begin');
         var panelBody = $('<div>').attr('class', 'panel-body');
-        var form = $('<form>');
-        for (var i = 0; i < library.start.length; i++) {
-            var option = $('<input>').attr('type', 'checkbox').attr('id', inputCount).attr('class', 'checkbox').attr('name', i).attr('value', library.start[i]);
-            var optionLabel = $('<label>').attr('class', 'option btn btn-info').attr('for', inputCount).html(library.start[i]);
-            form.append(option).append(optionLabel);
+        var form = $('<form>').attr('class', 'project-form');
+        $.each(library, function(key, value) {
+            var option = $('<input>').attr('type', 'checkbox').attr('id', inputCount).attr('class', 'checkbox').attr('name', key).attr('value', key);
+            var optionLabel = $('<label>').attr('class', 'option btn btn-info').attr('for', inputCount).html(key);
+            panelBody.append(option).append(optionLabel);
             inputCount++;
-        }
-        panelBody.append(form);
-        newPanel.append(panelHead).append(panelBody);
-        $('.tiers').append(newPanel);
+        })
+        form.append(newPanel.append(panelHead).append(panelBody));
+        tier.append(form);
+        $('.tiers').append(tier);
+
 
     }
 
@@ -49,41 +60,57 @@ $(document).ready(function() {
 
         $('.download').remove();
         var toggle = false;
+
+        categoryArray = [];
         roadmap = {};
-        $(this).parent().parent().nextAll().remove();
+        $(this).parent().nextAll().remove();
+
 
         var formResults = $(this).serializeArray();
         console.log(formResults);
 
-        var allForms = $('form').serializeArray();
+        var allForms = $('.project-form').serializeArray();
         for (var i = 0; i < allForms.length; i++) {
             roadmap[allForms[i].value.toLowerCase().replace(/\s/g, '')] = true;
+            if (categoryArray.indexOf(allForms[i].name) === -1) {
+                categoryArray.push(allForms[i].name);
+            }
         }
-        console.log(roadmap);
 
-        var newPanel = $('<div>').attr('class', 'tier panel panel-primary');
-        var panelHead = $('<div>').attr('class', 'panel-heading').html('Options');
-        var panelBody = $('<div>').attr('class', 'panel-body');
-        var nextButton = $('<button>').attr('class', 'next btn btn-default').html('Next');
-        var form = $('<form>');
+        var tier = $('<div>').attr('class', 'tier');
+        var form = $('<form>').attr('class', 'project-form');
 
-        for (var i = 0; i < formResults.length; i++) {
-            var result = formResults[i].value.toLowerCase();
-            result = result.replace(/\s/g, '');
+        for (var i = 0; i < categoryArray.length; i++) {
+            var newPanel = $('<div>').attr('class', 'panel panel-primary');
+            var panelHead = $('<div>').attr('class', 'panel-heading').html(categoryArray[i]);
+            var panelBody = $('<div>').attr('class', 'panel-body');
 
-            if (result != 'front' && result != 'back') {
-                roadmap[result] = true;
+            for (var z = 0; z < formResults.length; z++) {
+                var category = formResults[z].name;
+                var choice = formResults[z].value.toLowerCase().replace(/\s/g, "");;
+                // console.log(category);
+                // console.log(choice);
+
+                if (category === categoryArray[i]) {
+                    if (library[category][choice] != undefined) {
+                        if (choice != 'front' && choice != 'back') {
+                            panelBody.append('<span>' + formResults[z].value + '</span>');
+                        }
+                        for (var y = 0; y < library[category][choice].length; y++) {
+                            toggle = true;
+                            var option = $('<input>').attr('type', 'checkbox').attr('id', inputCount).attr('class', 'checkbox').attr('name', category).attr('value', library[category][choice][y]);
+                            var optionLabel = $('<label>').attr('class', 'option btn btn-info').attr('for', inputCount).html(library[category][choice][y]);
+                            panelBody.append(option).append(optionLabel);
+                            inputCount++;
+                        }
+                    }
+                }
             }
 
-            if (library[result] != undefined) {
-                form.append('<span>' + formResults[i].value + '</span>')
-                for (var z = 0; z < library[result].length; z++) {
-                    toggle = true;
-                    var option = $('<input>').attr('type', 'checkbox').attr('id', inputCount).attr('class', 'checkbox').attr('name', inputCount).attr('value', library[result][z]);
-                    var optionLabel = $('<label>').attr('class', 'option btn btn-info').attr('for', inputCount).html(library[result][z]);
-                    form.append(option).append(optionLabel);
-                    inputCount++;
-                }
+            if (panelBody.html() != '') {
+                newPanel.append(panelHead).append(panelBody);
+                form.append(newPanel);
+
             }
         }
 
@@ -92,26 +119,48 @@ $(document).ready(function() {
         }
 
         if (toggle === true) {
-
-            panelBody.append(form);
-            newPanel.append(panelHead).append(panelBody);
-            $('.tiers').append(newPanel);
+            tier.append(form);
+            $('.tiers').append(tier);
         } else if (formResults.length === 0) {
             return;
         } else {
-            $(this).append('<img class="download submit-button" src="download.png">');
+            $(this).append('<img class="download download-button" src="download.png">');
+            toggle = true;
         }
-
+        console.log(roadmap);
     })
 
     $(document).on('click', '.preview-button', function() {
+        $('.tiers').toggle();
+        $('.preview-pane').empty();
         $('.preview').toggle();
-        $.get('/', roadmap).done(function() {
-            console.log('Success');
+
+        $.each(testObj, function(key, value) {
+            var newPanel = $('<div>').attr('class', 'preview-box panel panel-primary');
+            var panelHead = $('<div>').attr('class', 'panel-heading').html(key);
+            var panelBody = $('<div>').attr('class', 'panel-body');
+            var form = $('<form>').attr('class', 'preview-form');
+            var editor = $('<textarea>').attr('name', key).text(value);
+
+            panelBody.append(form.append(editor));
+            newPanel.append(panelHead).append(panelBody);
+
+            $('.preview-pane').append(newPanel);
         })
     })
 
-    $(document).on('click', '.submit-button', function(event) {
+    $(document).on('click', '.confirm-button', function() {
+        var updates = $('.preview-form').serializeArray();
+        var newObj = {};
+        for (var i = 0; i < updates.length; i++) {
+            newObj[updates[i].name] = updates[i].value;
+        };
+        console.log(newObj);
+    })
+
+
+
+    $(document).on('click', '.download-button', function(event) {
         event.preventDefault();
         $.post('/', roadmap).done(function() {
             console.log('Success');
