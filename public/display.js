@@ -4,9 +4,9 @@ $(document).ready(function() {
         Front: {
             front: ['HTML', 'CSS CDN'],
             html: ['CSS', 'JavaScript', 'Plain/Empty'],
-            csscdn: ['Bootstrap', 'Material Design Lite', 'Skeleton', 'Bulma'],
-            css: ['Reset'],
-            javascript: ['jQuery']
+            csscdn: ['bootstrap', 'mdl', 'skeleton', 'Bulma'],
+            css: ['seset'],
+            javascript: ['jquery']
         },
         Back: {
             back: ['Node', 'Database'],
@@ -161,7 +161,18 @@ $(document).ready(function() {
         for (var i = 0; i < updates.length; i++) {
             newObj[updates[i].name] = updates[i].value;
         };
+
         console.log(newObj);
+
+        $.ajax({
+            url: '/zip',
+            data: newObj,
+            type: 'POST',
+            success: function(msg) {
+              console.log(msg);
+              window.location = msg;
+            }
+        });
     })
 
 
