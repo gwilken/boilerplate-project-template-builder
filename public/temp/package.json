@@ -1,0 +1,22 @@
+{
+    "name": "",
+    "version": "1.0.0",
+    "description": "",
+    "main": "",
+    "scripts": {
+        "test": "echo\"Error:notestspecified\"&&exit1"
+    },
+    "repository": {
+        "type": "",
+        "url": ""
+    },
+    "author": "",
+    "license": "",
+    "bugs": {
+        "url": ""
+    },
+    "homepage": "",
+    "dependencies": {
+        "express": "^4.15.3"
+    }
+}

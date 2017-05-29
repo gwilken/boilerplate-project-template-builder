@@ -21,7 +21,12 @@ module.exports = function(sequelize, DataTypes)	{
 		path: {
 			type: DataTypes.STRING,
 			allowNull: false,
-			unique: true
+			unique: false
+		},
+		filename: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			unique: false
 		},
 		text: {
 			type: DataTypes.TEXT,
