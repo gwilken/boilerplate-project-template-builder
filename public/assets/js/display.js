@@ -187,6 +187,27 @@ $(document).ready(function() {
 
     // EDIT SNIPPETS TABLE
 
+    $(document).on('click', '.add', function(event) {
+
+      var newSnip = {
+        name: $('#row-name-add').html(),
+        template: $('#row-template-add').html(),
+        marker: $('#row-marker-add').html(),
+        snippet_text: $('#row-snip-add').html()
+      }
+
+      console.log(newSnip);
+
+      $.post('/snippet', newSnip, function(res) {
+        console.log(res);
+
+        window.location.href = '/snippet';
+
+      })
+
+
+    });
+
 
     $(document).on('click', '.edit', function(event) {
       //  event.preventDefault();

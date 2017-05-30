@@ -51,7 +51,9 @@ var router = function(app){
 
 		if(!req.params.id) {
 
-			db.Snippet.findAll({}).then(snips => {
+			db.Snippet.findAll({
+				order: [['id', 'DESC']]
+			}).then(snips => {
 
 				res.render('update', { 'snippets': snips  });
 
@@ -59,6 +61,7 @@ var router = function(app){
 		} else {
 
 			db.Snippet.findAll({
+					order: [['id', 'DESC']],
 				where: {
 					id: req.params.id
 				}
