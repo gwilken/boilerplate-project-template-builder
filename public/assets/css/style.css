@@ -84,13 +84,6 @@ table {
     width: 100%;
 }
 
-.create {
-    height: 100px;
-    width: 200px;
-    border-radius: 5%;
-    font-weight: bold;
-}
-
 .panel {
     margin-bottom: 10px;
 }
@@ -273,4 +266,8 @@ input[type=checkbox] {
     margin-top: 100px;
     height: 300px;
     opacity: 0.15;
+}
+
+.cancel-add {
+    margin-top: 7px;
 }

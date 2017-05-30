@@ -173,7 +173,22 @@ $(document).ready(function() {
 
     // EDIT SNIPPETS TABLE
 
-    $(document).on('click', '.add', function(event) {
+    $('#row-add').hide();
+
+    $(document).on('click', '.add', function() {
+        $('#row-add').show();
+    })
+
+    $(document).on('click', '.cancel-add', function() {
+        $('#row-add').hide();
+        $('#row-name-add').html('');
+        $('#row-template-add').html('');
+        $('#row-marker-add').html('');
+        $('#row-snip-add').html('');
+    })
+
+
+    $(document).on('click', '.create', function(event) {
 
       var newSnip = {
         name: $('#row-name-add').html(),
