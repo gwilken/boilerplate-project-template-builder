@@ -17,6 +17,7 @@ var router = function(app){
 
 	app.post("/", (req, res) => {
 		var obj = req.body;
+		console.log(obj);
 		var args = builder.parseOptions(obj);
 
 		builder.build(args, function(data) {
@@ -26,6 +27,9 @@ var router = function(app){
 		    builder.beautify(result, function(resp) {
 
 					res.send(resp);
+
+					obj = {};
+					args = [];
 
 		    })
 		  })

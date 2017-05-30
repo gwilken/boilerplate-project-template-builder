@@ -63,7 +63,10 @@ var builder = {
               count++;
 
               if(count === countLength ) {
-                cb(workingTemplates);
+                  var response = workingTemplates;
+                  workingTemplates = {};
+                  this.userOptions = [];
+                cb(response);
                 return;
               }
             })
