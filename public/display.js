@@ -124,6 +124,11 @@ $(document).ready(function() {
     })
 
     $(document).on('click', '.preview-button', function() {
+        if ($(this).html() === 'PREVIEW') {
+            $(this).html('GO BACK');
+        } else {
+            $(this).html('PREVIEW');
+        }
         $('.toggle').toggle();
         $('.tiers').toggle();
         $('.preview-pane').empty();
