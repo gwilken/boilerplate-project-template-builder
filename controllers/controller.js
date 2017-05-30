@@ -1,5 +1,10 @@
 
 var db = require("../models");
+var builder = require('../controllers/builder.js');
+var writer = require('../controllers/writer.js');
+var zipper = require('../controllers/zipper.js');
+var path = require('path');
+
 //var template = require("./templates.js");
 
 var router = function(app){
@@ -13,11 +18,6 @@ var router = function(app){
 
 	});
 
-	app.get("/api/bundles", (req, res)=>{
-		db.Bundle.findAll({
-			include: [db.Snippet]
-		}).then(dbBundle=>res.json(dbBundle));
-	});
 
 	app.get("/api/bundles/:id", (req, res)=>{
 
@@ -44,16 +44,53 @@ var router = function(app){
 		});
 	});
 
-	app.post("/api/bundles", (req, res)=>{
+	app.post("/", (req, res) => {
 
-		db.Bundle.create(req.body).then(dbBundle=> {
-			console.log(dbBundle);
-			res.json(dbBundle);
-		}).catch(err=>{
-			console.error(err);
-			res.json(err);
-		});
+		var obj = req.body;
+
+		//console.log('body obj:', obj);
+
+		var args = builder.parseOptions(obj);
+
+		//console.log('parsed array:', args);
+
+
+		builder.build(args, function(data) {
+
+		  builder.scrubMarkers(data, function(result) {
+
+		    builder.beautify(result, function(resp) {
+
+		      // writer.writeZipFile(res, function() {
+		      //   console.log('Zip file written.');
+		      // });
+
+					res.send(resp);
+
+		    })
+		  })
+		})
+
 	});
+
+	app.post("/zip", (req, res) => {
+
+		var obj = req.body;
+
+		console.log('zip obj post:', obj);
+
+		writer.writeZipFile(obj, function() {
+
+		  console.log('Zip file written.');
+
+			var msg = '/zips/files.zip';
+
+			res.send(msg);
+
+		});
+
+	});
+
 
 	app.delete("/api/bundles/:id", (req, res)=>{
 		db.Bundle.destroy({
