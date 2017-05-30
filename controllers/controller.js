@@ -11,62 +11,12 @@ var router = function(app){
 
 	app.get("/", function(req, res) {
 
-		res.sendFile('index.html', function(err) {
-			if(err) console.log(err);
-				else console.log('ok');
-		})
-
-	});
-
-<<<<<<< HEAD
-	app.get("/api/bundles/name/:name", (req,res)=>{
-		db.Bundle.findOne({
-			include: [db.Snippet],
-			where: {
-				name: req.params.name
-			}
-		}).then(dbBundle=>{res.json(dbBundle)})
-	});
-
-	app.get("/api/bundles/id/:id", (req, res)=>{
-=======
-
-	app.get("/api/bundles/:id", (req, res)=>{
-
->>>>>>> master
-		db.Bundle.findOne({
-			include: [db.Snippet],
-			where: {
-				id: req.params.id
-			}
-		}).then(dbBundle=>{
-			console.log(dbBundle);
-			res.json(dbBundle);
-		}).catch(err=>{
-			console.error(err);
-			res.json(err);
-		});
-	});
-
-	app.get("/api/dependency/id/:id", (req, res)=>{
-		db.Bundle.findAll({
-			include: [db.Snippet],
-			where: {
-				dependency: req.params.id
-			}
-		});
 	});
 
 	app.post("/", (req, res) => {
 
 		var obj = req.body;
-
-		//console.log('body obj:', obj);
-
 		var args = builder.parseOptions(obj);
-
-		//console.log('parsed array:', args);
-
 
 		builder.build(args, function(data) {
 
@@ -74,23 +24,16 @@ var router = function(app){
 
 		    builder.beautify(result, function(resp) {
 
-		      // writer.writeZipFile(res, function() {
-		      //   console.log('Zip file written.');
-		      // });
-
 					res.send(resp);
 
 		    })
 		  })
 		})
-
 	});
 
 	app.post("/zip", (req, res) => {
 
 		var obj = req.body;
-
-		console.log('zip obj post:', obj);
 
 		writer.writeZipFile(obj, function() {
 
@@ -101,69 +44,96 @@ var router = function(app){
 			res.send(msg);
 
 		});
-
 	});
 
-<<<<<<< HEAD
-	app.delete("/api/bundles/id/:id", (req, res)=>{
-=======
+	app.get("/snippet/:id?", (req, res) => {
+		console.log('snippet id route hit...');
 
-	app.delete("/api/bundles/:id", (req, res)=>{
->>>>>>> master
-		db.Bundle.destroy({
-			where: {
-				id: req.params.id
-			}
-		}).then(dbBundle=>{
-			console.log(dbBundle);
-			res.json(dbBundle)
-		}).catch(err =>{
-			console.error(err);
-			res.json(err);
-		});
+		if(!req.params.id) {
+
+			db.Snippet.findAll({
+				order: [['id', 'DESC']]
+			}).then(snips => {
+
+				res.render('update', { 'snippets': snips  });
+
+			})
+		} else {
+
+			db.Snippet.findAll({
+					order: [['id', 'DESC']],
+				where: {
+					id: req.params.id
+				}
+			}).then(snip => {
+				console.log(snip);
+
+				res.render('update', { 'snippets': snip} );
+
+			})
+		}
 	});
 
-	app.get("/api/snippets", (req, res)=>{
-		var query = {};
-		if(req.query.bundle_id){
-			query.BundleId = req.query.bundle_id;
+	app.get("/snipjson", (req, res) => {
+		console.log('snippet json route hit...');
+
+		if(!req.query.id) {
+
+			db.Snippet.findAll({}).then(snips => {
+
+				res.json(snips);
+
+			})
+		} else {
+
+			db.Snippet.findAll({
+				where: {
+					id: req.query.id
+				}
+			}).then(snip => {
+				console.log(snip);
+
+				res.json(snip);
+
+			})
 		}
 
-		db.Snippet.findAll({
-			include: [db.Bundle],
-			where: query
-		}).then(dbSnippet=>res.json(dbSnippet));
 	});
 
-	app.get("/api/snippets/id/:id", (req, res)=>{
-		db.Snippet.findOne({
-			include: [db.Bundle],
+
+	app.get("/edit/:id?", (req, res) => {
+		console.log('snippet edit route hit...');
+
+		console.log(req.params.id);
+
+		db.Snippet.findAll({
 			where: {
 				id: req.params.id
 			}
-		}).then(dbSnippet=>{
-			console.log(sbSnippet)
-			res.json(dbSnippet)
-		}).catch(err=>{
-			console.error(err);
-			res.json(err);
+		}).then(snip => {
+
+			res.json(snip);
+
 		});
+
 	});
 
-	app.post("/api/snippets", (req, res)=>{
-		db.Snippet.create(req.body).then(dbSnippet=>{
-			console.log("-----------------------");
+	app.post("/snippet", (req, res) => {
+		db.Snippet.create(req.body).then(dbSnippet => {
+
 			console.log(dbSnippet);
 			console.log("-----------------------");
 			res.json(dbSnippet);
-		}).catch(err=>{
+
+		}).catch(err => {
+
 			console.error(err);
 			res.json(err);
 		});
-
 	});
 
-	app.delete("/api/snippets/id/:id", (req, res)=>{
+
+	app.delete("/snippet/:id", (req, res) => {
 		db.Snippet.destroy({
 			where: {
 				id: req.params.id
@@ -177,23 +147,47 @@ var router = function(app){
 		});
 	});
 
-	app.put("/api/snippets", (req, res)=>{
+	app.post("/update", (req, res) => {
+
 		db.Snippet.update(
 			req.body,
 			{
 				where: {
 					id: req.body.id
 				}
-			}).then(dbSnippet=>{
+			}).then(dbSnippet => {
+
 				console.log(dbSnippet);
 				res.json(dbSnippet);
+
 			}).catch(err=>{
+
 				console.error(err);
 				res.json(err);
-			});
-		}
-	);
 
+			});
+		});
+
+		app.post("/deleteSnip", (req, res) => {
+
+			db.Snippet.destroy(
+				{
+					where: {
+						id: req.body.id
+					}
+				}).then(dbSnippet => {
+
+					console.log(dbSnippet);
+					res.json(dbSnippet);
+
+				}).catch(err=>{
+
+					console.error(err);
+					res.json(err);
+
+				});
+			}
+	);
 
 }
 

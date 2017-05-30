@@ -1,6 +1,7 @@
 
-var express = require("express");
-var bodyParser = require("body-parser");
+const express 		= require("express");
+const bodyParser 	= require("body-parser");
+const exphbs 			= require("express-handlebars");
 
 var app = express();
 
@@ -17,6 +18,9 @@ app.use(express.static("./public"));
 
 require("./controllers/controller.js")(app);
 require("./controllers/admin-html-routes.js")(app);
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 db.sequelize.sync().then(function() {
 	app.listen(PORT, function() {

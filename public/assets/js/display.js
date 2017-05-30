@@ -170,6 +170,117 @@ $(document).ready(function() {
     })
 
 
+
+    $(document).on('click', '.download-button', function(event) {
+        event.preventDefault();
+        $.post('/', roadmap).done(function() {
+            console.log('Success');
+        })
+    })
+
+
+    // EDIT SNIPPETS TABLE
+
+    $(document).on('click', '.add', function(event) {
+
+      var newSnip = {
+        name: $('#row-name-add').html(),
+        template: $('#row-template-add').html(),
+        marker: $('#row-marker-add').html(),
+        snippet_text: $('#row-snip-add').html()
+      }
+
+      console.log(newSnip);
+
+      $.post('/snippet', newSnip, function(res) {
+        console.log(res);
+
+        window.location.href = '/snippet';
+
+      })
+    });
+
+    $(document).on('click', '.delete', function(event) {
+
+      $.post('/deleteSnip', {id: event.target.value}, function(res) {
+        console.log(res);
+
+        window.location.href = '/snippet';
+
+      })
+    });
+
+    $(document).on('click', '.edit', function(event) {
+      //  event.preventDefault();
+
+        var id = event.target.value;
+
+        $('#row-' + id).children().css('color', 'red');
+
+        $('#row-' + id).attr('contenteditable', 'true');
+        $('#row-edit-' + id).css('display', 'none');
+        $('#row-delete-' + id).css('display', 'initial');
+        $('#row-save-' + id).css('display', 'initial');
+        $('#row-cancel-' + id).css('display', 'initial');
+    });
+
+
+    $(document).on('click', '.save', function(event) {
+        //event.preventDefault();
+
+        var id = event.target.value;
+
+        $('#row-' + id).children().css('color', 'black');
+        $('#row-' + id).attr('contenteditable', 'false');
+
+        $('#row-edit-' + id).css('display', 'initial');
+        $('#row-save-' + id).css('display', 'none');
+        $('#row-delete-' + id).css('display', 'none');
+        $('#row-cancel-' + id).css('display', 'none');
+
+        var obj = {
+          id: id,
+          name: $('#row-name-' + id).html(),
+          template: $('#row-template-' + id).html(),
+          marker: $('#row-marker-' + id).html(),
+          snippet_text: $('#row-snip-' + id).html()
+        }
+
+        console.log(obj);
+
+        $.post('/update', obj, function(res) {
+          console.log(res);
+        })
+    })
+
+
+    $(document).on('click', '.cancel', function(event) {
+      //  event.preventDefault();
+
+        var id = event.target.value;
+
+        $('#row-' + id).children().css('color', 'black');
+        $('#row-' + id).attr('contenteditable', 'false');
+
+        $('#row-edit-' + id).css('display', 'initial');
+        $('#row-save-' + id).css('display', 'none');
+        $('#row-delete-' + id).css('display', 'none');
+        $('#row-cancel-' + id).css('display', 'none');
+
+        $.get('/snipjson', {id: id}, function(res) {
+
+          var snip = $('<text>').text(res[0].snippet_text);
+
+          $('#row-name-' + id).html( res[0].name );
+          $('#row-template-' + id).html( res[0].template );
+          $('#row-marker-' + id).html( res[0].marker );
+          $('#row-snip-' + id).html(snip);
+        });
+
+    });
+
+
+
     //LOGINS
 
     $(document).on('click', '.login1', function() {
