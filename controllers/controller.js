@@ -10,11 +10,7 @@ var path = require('path');
 var router = function(app){
 
 	app.get("/", function(req, res) {
-
-		res.sendFile('index.html', function(err) {
-			if(err) console.log(err);
-				else console.log('ok');
-		})
+		res.render('index');
 	});
 
 	app.post("/", (req, res) => {
@@ -53,26 +49,47 @@ var router = function(app){
 	app.get("/snippet/:id?", (req, res) => {
 		console.log('snippet id route hit...');
 
-		if(req.params.id) {
-			db.Snippet.findOne({
+		if(!req.params.id) {
+
+			db.Snippet.findAll({}).then(snips => {
+
+				res.render('update', { 'snippets': snips  });
+
+			})
+		} else {
+
+			db.Snippet.findAll({
 				where: {
 					id: req.params.id
 				}
 			}).then(snip => {
 				console.log(snip);
 
-				res.json(snip)
+				res.render('update', { 'snippets': snip} );
 
 			})
-		} else
+		}
 
-			db.Snippet.findAll({}).then(snips => {
-				res.json(snips);
-			})
 	});
 
+	app.get("/edit/:id?", (req, res) => {
+		console.log('snippet edit route hit...');
 
-	app.post("/snippet", (req, res)=>{
+		console.log(req.params.id);
+
+		db.Snippet.findAll({
+			where: {
+				id: req.params.id
+			}
+		}).then(snip => {
+
+			res.json(snip);
+
+		});
+
+	});
+
+	app.post("/snippet", (req, res) => {
 		db.Snippet.create(req.body).then(dbSnippet => {
 
 			console.log(dbSnippet);

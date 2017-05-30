@@ -3,6 +3,32 @@ html, body {
     background-color: snow;
     font-family: 'Poppins', sans-serif;
 }
+td {
+  word-wrap: break-word;
+}
+
+table {
+  table-layout: fixed;
+  white-space: normal!important;
+}
+
+.markerrow {
+  min-width: 150px;
+}
+
+.edit {
+  display: initial;
+}
+
+.cancel {
+    margin: 5% 5% 0 0;
+    display: none;
+}
+
+.save {
+    margin: 5% 5% 0 0;
+    display: none;
+}
 
 .nav {
     position: relative;

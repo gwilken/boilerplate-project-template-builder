@@ -1,0 +1,36 @@
+
+
+<div class="mdl-grid">
+
+  <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+
+    <thead>
+      <tr>
+        <th class="mdl-data-table__cell--non-numeric">Name</th>
+        <th class="mdl-data-table__cell--non-numeric">Template</th>
+        <th class="mdl-data-table__cell--non-numeric">Marker</th>
+        <th class="mdl-data-table__cell--non-numeric">Snippet</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      {{#each snippets}}
+
+      <tr id='row-{{this.id}}'>
+        <td id='row-name-{{this.name}}' class="mdl-data-table__cell--non-numeric">{{this.name}}</td>
+        <td id='row-template-{{this.template}}' class="mdl-data-table__cell--non-numeric">{{this.template}}</td>
+        <td id='row-marker-{{this.marker}}' class="mdl-data-table__cell--non-numeric markerrow">{{this.marker}}</td>
+        <td id='row-snip-{{this.snippet_text}}' class="mdl-data-table__cell--non-numeric">{{this.snippet_text}}</td>
+        <td><button id='row-edit-{{this.id}}' class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored edit" value={{this.id}}>Edit</button>
+        <button id='row-save-{{this.id}}' class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored save" value={{this.id}}>Save</button>
+        <button id='row-cancel-{{this.id}}' class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored cancel" value={{this.id}}>Cancel</button></td>
+
+      </tr>
+
+      {{/each}}
+
+    </tbody>
+  </table>
+
+</div>
