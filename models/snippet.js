@@ -1,5 +1,8 @@
 module.exports = function(sequelize, DataTypes) {
 
+//gw - added type in snippet
+//gw - dependecy_id is STRING
+
 	var Snippet = sequelize.define("Snippet", {
 		id: {
 			type: DataTypes.INTEGER,
@@ -27,6 +30,10 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.STRING,
 			allowNull: false
 		}
+
+	},
+	{
+		timestamps: false
 
 	});
 
