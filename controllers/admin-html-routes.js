@@ -9,11 +9,5 @@ module.exports = function(app){
 	app.get("/admin", (req, res)=> {
 		res.sendFile(path.join(__dirname, "../public/admin.html"));
 	});
-<<<<<<< HEAD
 
-	app.get("/bundles", (req, res)=>{
-		res.sendFile(path.join(__dirname, "../public/bundle-manager.html"));
-	});
-=======
->>>>>>> master
 }

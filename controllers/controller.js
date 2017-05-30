@@ -11,10 +11,11 @@ var router = function(app){
 
 	app.get("/", function(req, res) {
 
+		res.render('index' );
+
 	});
 
 	app.post("/", (req, res) => {
-
 		var obj = req.body;
 		var args = builder.parseOptions(obj);
 
@@ -181,10 +182,8 @@ var router = function(app){
 					res.json(dbSnippet);
 
 				}).catch(err=>{
-
 					console.error(err);
 					res.json(err);
-
 				});
 			}
 	);
