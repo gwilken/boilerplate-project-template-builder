@@ -7,6 +7,10 @@ td {
   word-wrap: break-word;
 }
 
+td > button {
+  float: right;
+}
+
 table {
   table-layout: fixed;
   white-space: normal!important;
@@ -26,6 +30,11 @@ table {
 }
 
 .save {
+    margin: 5% 5% 0 0;
+    display: none;
+}
+
+.delete {
     margin: 5% 5% 0 0;
     display: none;
 }

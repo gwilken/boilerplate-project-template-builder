@@ -146,21 +146,47 @@ var router = function(app){
 		});
 	});
 
-	app.put("/api/snippets", (req, res)=>{
+	app.post("/update", (req, res) => {
+
 		db.Snippet.update(
 			req.body,
 			{
 				where: {
 					id: req.body.id
 				}
-			}).then(dbSnippet=>{
+			}).then(dbSnippet => {
+
 				console.log(dbSnippet);
 				res.json(dbSnippet);
+
 			}).catch(err=>{
+
 				console.error(err);
 				res.json(err);
+
 			});
-		}
+		});
+
+		app.post("/deleteSnip", (req, res) => {
+
+			db.Snippet.destroy(
+				{
+					where: {
+						id: req.body.id
+					}
+				}).then(dbSnippet => {
+
+					console.log(dbSnippet);
+					res.json(dbSnippet);
+
+				}).catch(err=>{
+
+					console.error(err);
+					res.json(err);
+
+				});
+			}
+
 	);
 }
 

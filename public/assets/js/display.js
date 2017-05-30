@@ -204,10 +204,17 @@ $(document).ready(function() {
         window.location.href = '/snippet';
 
       })
-
-
     });
 
+    $(document).on('click', '.delete', function(event) {
+
+      $.post('/deleteSnip', {id: event.target.value}, function(res) {
+        console.log(res);
+
+        window.location.href = '/snippet';
+
+      })
+    });
 
     $(document).on('click', '.edit', function(event) {
       //  event.preventDefault();
@@ -218,6 +225,7 @@ $(document).ready(function() {
 
         $('#row-' + id).attr('contenteditable', 'true');
         $('#row-edit-' + id).css('display', 'none');
+        $('#row-delete-' + id).css('display', 'initial');
         $('#row-save-' + id).css('display', 'initial');
         $('#row-cancel-' + id).css('display', 'initial');
     });
@@ -233,6 +241,7 @@ $(document).ready(function() {
 
         $('#row-edit-' + id).css('display', 'initial');
         $('#row-save-' + id).css('display', 'none');
+        $('#row-delete-' + id).css('display', 'none');
         $('#row-cancel-' + id).css('display', 'none');
 
         var obj = {
@@ -244,6 +253,10 @@ $(document).ready(function() {
         }
 
         console.log(obj);
+
+        $.post('/update', obj, function(res) {
+          console.log(res);
+        })
     })
 
 
@@ -257,6 +270,7 @@ $(document).ready(function() {
 
         $('#row-edit-' + id).css('display', 'initial');
         $('#row-save-' + id).css('display', 'none');
+        $('#row-delete-' + id).css('display', 'none');
         $('#row-cancel-' + id).css('display', 'none');
 
         $.get('/snipjson', {id: id}, function(res) {
