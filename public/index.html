@@ -19,21 +19,10 @@
             <header class="nav mdl-layout__header">
                 <div class="mdl-layout__header-row">
                     <!-- Title -->
-                    <a href='index.html'><span class="nav-title mdl-layout-title"><img class='logo' src='boilerplate-logo.png'></span></a>
-                    <!-- Add spacer, to align navigation to the right -->
                     <div class="mdl-layout-spacer"></div>
-                    <!-- Navigation. We hide it in small screens. -->
-                    <nav class="mdl-navigation mdl-layout--large-screen-only">
-                        <div class="mdl-textfield">
-                            <span>Email</span><br>
-                            <input class="email1 mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp">
-                        </div>
-                        <div class="mdl-textfield">
-                            <span>Password</span><br>
-                            <input class="password1 mdl-textfield__input" type="password" name="sample" id="fixed-header-drawer-exp">
-                        </div>
-                        <a class="login1 mdl-navigation__link" href="#">Log In</a>
-                    </nav>
+
+                    <span class="nav-title mdl-layout-title">BOILERPLATE</span>
+                    <!-- Add spacer, to align navigation to the right -->
                 </div>
             </header>
             <div class="mdl-layout__drawer">
@@ -53,11 +42,19 @@
             </div>
 
             <div class='container'>
-                <div class='intro'>
+                <!-- <div class='intro'>
                     <button class="create mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Create Project</button>
+                </div> -->
+                <div class='toggle'>
+                    <div class='toggle-title'>// CREATE PROJECT</div>
+                    <div class='toggle-options'></div>
+
+                    <!-- <form class='toggle-form'></form> -->
+                    <img class='project-icon' src='http://www.freeiconspng.com/uploads/project-icon-30.png'>
                 </div>
                 <div class='tiers'>
-                    <div class='section-title'>// CREATE PROJECT</div>
+                    <!-- <div class='section-title'>// CREATE PROJECT</div> -->
+                    <form class='tiers-form'></form>
                 </div>
                 <div class='preview'>
                     <div class='section-title'>// PREVIEW FILES</div>
@@ -66,8 +63,7 @@
                 </div>
                 <div class='post-container'>
                     <div class='submit-container'>
-                        <button class='preview-button btn btn-primary'>PREVIEW</button>
-                        <button class='download-button dl btn btn-primary'>DOWNLOAD</button>
+                        <button class='preview-button btn btn-primary btn-lg'>PREVIEW</button>
                     </div>
                 </div>
             </div>

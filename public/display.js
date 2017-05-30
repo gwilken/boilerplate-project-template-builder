@@ -2,16 +2,22 @@ $(document).ready(function() {
 
     var library = {
         Front: {
-            front: ['HTML', 'CSS CDN'],
-            html: ['CSS', 'JavaScript', 'Plain/Empty'],
-            csscdn: ['Bootstrap', 'Material Design Lite', 'Skeleton', 'Bulma'],
-            css: ['Reset'],
-            javascript: ['jQuery']
+            html: {
+                default: ['Standard (html)']
+            },
+            css: {
+                cdn: ['Bootstrap', 'MDL', 'Skeleton', 'Bulma'],
+                reset: ['Meyerweb', 'HTML5Doctor', 'Normalize']
+            },
+            javascript: {
+                jquery: ['jQuery', 'UI', 'Mobile']
+            }
         },
         Back: {
-            back: ['Node', 'Database'],
-            node: ['HTTP', 'Express'],
-            database: ['MySql', 'MongoDB']
+            node: {
+                server: ['HTTP', 'Express'],
+                database: ['MySql', 'MongoDB']
+            }
         }
     }
 
@@ -20,125 +26,113 @@ $(document).ready(function() {
         node: '//test var express=require("express"){--require--}'
     }
 
-    var inputCount = 0;
+    var count = 0;
     var roadmap = {};
     var panelToggle = true;
     var allForms = [];
 
-    $('.tiers').hide();
+    // $('.tiers').hide();
     $('.preview').hide();
     $('.post-container').hide();
 
-    $(document).on('click', '.create', function() {
-        $(this).hide();
-        $('.tiers').show();
-        start();
-    })
+    // $(document).on('click', '.create', function() {
+    //     $(this).hide();
+    //     // $('.tiers').show();
+    //     start();
+    // })
 
+//     function start() {
+//         $.each(library, function(category, object) {
+//             var toggle = $('<button>').attr('class', 'btn btn-default').html(category);
+//             $('.toggle').append(toggle);
+//     })
+// }
 
     function start() {
 
-        var tier = $('<div>').attr('class', 'tier');
-        var newPanel = $('<div>').attr('class', 'panel panel-primary');
-        var panelHead = $('<div>').attr('class', 'panel-heading').html('Begin');
-        var panelBody = $('<div>').attr('class', 'panel-body');
-        var form = $('<form>').attr('class', 'project-form');
-        $.each(library, function(key, value) {
-            var option = $('<input>').attr('type', 'checkbox').attr('id', inputCount).attr('class', 'checkbox').attr('name', key).attr('value', key);
-            var optionLabel = $('<label>').attr('class', 'option btn btn-info').attr('for', inputCount).html(key);
-            panelBody.append(option).append(optionLabel);
-            inputCount++;
-        })
-        form.append(newPanel.append(panelHead).append(panelBody));
-        tier.append(form);
-        $('.tiers').append(tier);
+        $.each(library, function(category, object) {
 
+            var option = $('<input>').attr('type', 'checkbox').attr('id', count).attr('class', 'checkbox').attr('name', category).attr('value', category);
+            var optionLabel = $('<label>').attr('class', 'toggle-button option btn btn-info').attr('for', count).html(category);
+            count++;
+            $('.toggle-options').append(option).append(optionLabel);
+
+            $.each(object, function(key, subOption) {
+                // var tier = $('<div>').attr('class', 'tier');
+                var newPanel = $('<div>').attr('class', category + ' tier panel panel-primary');
+                var panelHead = $('<div>').attr('class', 'panel-heading').html(key);
+                var panelBody = $('<div>').attr('class', 'panel-body');
+                var form = $('<form>').attr('class', 'project-form');
+
+                $.each(subOption, function(option, array) {
+                    var subPanel = $('<div>').attr('class', 'subPanel panel panel-primary');
+                    var subHead = $('<div>').attr('class', 'subHead panel-heading').html(option);
+                    var subBody = $('<div>').attr('class', 'subBody panel-body');
+                    subHead.prepend('<span class="glyphicon glyphicon-plus"></span>');
+                    $.each(array, function(index, value) {
+                        var option = $('<input>').attr('type', 'checkbox').attr('id', count).attr('class', 'checkbox').attr('name', category).attr('value', value);
+                        var optionLabel = $('<label>').attr('class', 'option btn btn-info').attr('for', count).html(value);
+                        subBody.append(option).append(optionLabel);
+                        count++;
+                    })
+                    panelBody.append(subPanel.append(subHead).append(subBody));
+                })
+
+                // tier.append(newPanel.append(panelHead).append(panelBody))
+                $('.tiers-form').append(newPanel.append(panelHead).append(panelBody));
+                newPanel.hide();
+                // var option = $('<input>').attr('type', 'checkbox').attr('id', count).attr('class', 'checkbox').attr('name', key).attr('value', key);
+                // var optionLabel = $('<label>').attr('class', 'option btn btn-info').attr('for', count).html(key);
+                // panelBody.append(option).append(optionLabel);
+                // count++;
+            })
+        })
+        // form.append(newPanel.append(panelHead).append(panelBody));
+        // tier.append(form);
+        // $('.tiers').append(tier);
+        $('.subBody').hide();
+        // $('.tiers-form').hide();
 
     }
 
+    start();
+
+
+
+    $(document).on('click', '.toggle-button', function() {
+
+        $('.project-icon').hide();
+
+        var category = $(this).html();
+        $('.' + category).children().find('input[type=checkbox]:checked').prop('checked', false);
+        $('.' + category).toggle();
+    })
+
     $(document).on('change', 'form', function() {
-
-        $('.download').remove();
-        var toggle = false;
-
-        categoryArray = [];
-        roadmap = {};
-        $(this).parent().nextAll().remove();
-
-
-        var formResults = $(this).serializeArray();
-        console.log(formResults);
-
-        var allForms = $('.project-form').serializeArray();
-        for (var i = 0; i < allForms.length; i++) {
-            roadmap[allForms[i].value.toLowerCase().replace(/\s/g, '')] = true;
-            if (categoryArray.indexOf(allForms[i].name) === -1) {
-                categoryArray.push(allForms[i].name);
-            }
-        }
-
-        var tier = $('<div>').attr('class', 'tier');
-        var form = $('<form>').attr('class', 'project-form');
-
-        for (var i = 0; i < categoryArray.length; i++) {
-            var newPanel = $('<div>').attr('class', 'panel panel-primary');
-            var panelHead = $('<div>').attr('class', 'panel-heading').html(categoryArray[i]);
-            var panelBody = $('<div>').attr('class', 'panel-body');
-
-            for (var z = 0; z < formResults.length; z++) {
-                var category = formResults[z].name;
-                var choice = formResults[z].value.toLowerCase().replace(/\s/g, "");;
-                // console.log(category);
-                // console.log(choice);
-
-                if (category === categoryArray[i]) {
-                    if (library[category][choice] != undefined) {
-                        if (choice != 'front' && choice != 'back') {
-                            panelBody.append('<span>' + formResults[z].value + '</span>');
-                        }
-                        for (var y = 0; y < library[category][choice].length; y++) {
-                            toggle = true;
-                            var option = $('<input>').attr('type', 'checkbox').attr('id', inputCount).attr('class', 'checkbox').attr('name', category).attr('value', library[category][choice][y]);
-                            var optionLabel = $('<label>').attr('class', 'option btn btn-info').attr('for', inputCount).html(library[category][choice][y]);
-                            panelBody.append(option).append(optionLabel);
-                            inputCount++;
-                        }
-                    }
-                }
-            }
-
-            if (panelBody.html() != '') {
-                newPanel.append(panelHead).append(panelBody);
-                form.append(newPanel);
-
-            }
-        }
-
-        if (roadmap['html'] != undefined || roadmap['csscdn'] != undefined || roadmap['node'] != undefined || roadmap['database'] != undefined) {
-            $('.post-container').show();
-        }
-
-        if (toggle === true) {
-            tier.append(form);
-            $('.tiers').append(tier);
-        } else if (formResults.length === 0) {
-            return;
-        } else {
-            $(this).append('<img class="download download-button" src="download.png">');
-            toggle = true;
+        var choices = $(this).serializeArray();
+        for (var i = 0; i < choices.length; i++) {
+            roadmap[choices[i].value.toLowerCase().replace(/\s/g, '')] = true;
         }
         console.log(roadmap);
+        if (!$.isEmptyObject(roadmap)) {
+            $('.post-container').show();
+        }
+    })
+
+    $(document).on('click', '.subHead', function() {
+        $(this).parent().children('.subBody').toggle();
     })
 
     $(document).on('click', '.preview-button', function() {
+        $('.toggle').toggle();
         $('.tiers').toggle();
         $('.preview-pane').empty();
         $('.preview').toggle();
 
-        $.post('/', roadmap).done(function(data) {
-            console.log('Success');
+        // $.post('/', roadmap).done(function() {
+        //     console.log('Success');
 
-            $.each(data, function(key, value) {
+            $.each(testObj, function(key, value) {
                 var newPanel = $('<div>').attr('class', 'preview-box panel panel-primary');
                 var panelHead = $('<div>').attr('class', 'panel-heading').html(key);
                 var panelBody = $('<div>').attr('class', 'panel-body');
@@ -150,7 +144,7 @@ $(document).ready(function() {
 
                 $('.preview-pane').append(newPanel);
             })
-        })
+        // })
 
 
     })
@@ -164,14 +158,6 @@ $(document).ready(function() {
         console.log(newObj);
     })
 
-
-
-    $(document).on('click', '.download-button', function(event) {
-        event.preventDefault();
-        $.post('/', roadmap).done(function() {
-            console.log('Success');
-        })
-    })
 
     //LOGINS
 

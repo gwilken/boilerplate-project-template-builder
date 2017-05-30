@@ -28,16 +28,21 @@ html, body {
     text-align: center;
 }
 
-.tiers {
+.tiers-form {
     display: flex;
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/
+    justify-content: center;
     align-items: flex-start;
+    width: 100%;
+    margin-top: 20px;
 }
 
 .tier {
-    width: 200px;
+    /*width: 200px;*/
+    flex: 1;
     display: inline-block;
-    padding-right: 10px;
+    margin-right: 10px;
+    max-width: 25%;
 }
 
 .panel {
@@ -68,6 +73,7 @@ html, body {
     width: 100%;
     margin: 3px;
     background-color: lightsteelblue;
+    border: none;
 }
 
 .option:hover {
@@ -86,16 +92,7 @@ input[type=checkbox] {
     margin: 10px auto;
 }
 
-.download {
-    width: 35px;
-    height: auto;
-    border: 1px solid slategray;
-    border-radius: 5%;
-    padding: 5px;
-    margin-top: 5px;
-}
-
-.download:hover {
+.preview-button:hover {
     cursor: pointer;
 }
 
@@ -105,7 +102,7 @@ input[type=checkbox] {
   100% { background-color: #4682B4; box-shadow: 0 0 3px #4682B4; }
 }
 
-.dl {
+.preview-button {
   animation: glowing 1500ms infinite;
 }
 
@@ -171,7 +168,7 @@ input[type=checkbox] {
     padding: 5px;
     font-size: 18px;
     font-weight: bold;
-    width: 100%
+    width: 100%;
 }
 
 .preview-confirm {
@@ -192,4 +189,53 @@ input[type=checkbox] {
 
 .new {
     min-height: 200px;
+}
+
+.subPanel, .subHead, .subBody {
+    border: none;
+    box-shadow: none;
+}
+
+.panel-primary > .subHead {
+    background-color: inherit;
+    color: dimgray;
+    border: none;
+    box-shadow: none;
+    /*box-shadow: 0 2px 1px grey;*/
+    width: 50%;
+    margin: 0 auto;
+    border-bottom: 1px solid dimgray;
+    border-radius: 5%;
+}
+
+
+.panel-primary > .subHead:hover {
+    cursor: pointer;
+    background-color: ghostwhite;
+}
+
+.toggle {
+    text-align: center;
+}
+
+.toggle-options {
+    display: flex;
+    justify-content: center;
+}
+
+.toggle-button {
+    width: 100px;
+}
+
+.glyphicon {
+    padding-top: 3px;
+    font-size: 10px;
+    color: lightsteelblue;
+    margin-right: 7px;
+}
+
+.project-icon {
+    margin-top: 100px;
+    height: 300px;
+    opacity: 0.15;
 }
