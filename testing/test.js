@@ -16,7 +16,6 @@ var obj = {
 
 var args = builder.parseOptions(obj);
 
-
 builder.build(args, function(data) {
 
   builder.scrubMarkers(data, function(result) {

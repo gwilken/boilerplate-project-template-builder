@@ -15,45 +15,12 @@ var router = function(app){
 			if(err) console.log(err);
 				else console.log('ok');
 		})
-
-	});
-
-
-	app.get("/api/bundles/:id", (req, res)=>{
-
-		db.Bundle.findOne({
-			include: [db.Snippet],
-			where: {
-				id: req.params.id
-			}
-		}).then(dbBundle=>{
-			console.log(dbBundle);
-			res.json(dbBundle);
-		}).catch(err=>{
-			console.error(err);
-			res.json(err);
-		});
-	});
-
-	app.get("/api/dependency/:id", (req, res)=>{
-		db.Bundle.findAll({
-			include: [db.Snippet],
-			where: {
-				dependency: req.params.id
-			}
-		});
 	});
 
 	app.post("/", (req, res) => {
 
 		var obj = req.body;
-
-		//console.log('body obj:', obj);
-
 		var args = builder.parseOptions(obj);
-
-		//console.log('parsed array:', args);
-
 
 		builder.build(args, function(data) {
 
@@ -61,23 +28,16 @@ var router = function(app){
 
 		    builder.beautify(result, function(resp) {
 
-		      // writer.writeZipFile(res, function() {
-		      //   console.log('Zip file written.');
-		      // });
-
 					res.send(resp);
 
 		    })
 		  })
 		})
-
 	});
 
 	app.post("/zip", (req, res) => {
 
 		var obj = req.body;
-
-		console.log('zip obj post:', obj);
 
 		writer.writeZipFile(obj, function() {
 
@@ -88,64 +48,44 @@ var router = function(app){
 			res.send(msg);
 
 		});
+	});
 
+	app.get("/snippet/:id?", (req, res) => {
+		console.log('snippet id route hit...');
+
+		if(req.params.id) {
+			db.Snippet.findOne({
+				where: {
+					id: req.params.id
+				}
+			}).then(snip => {
+				console.log(snip);
+
+				res.json(snip)
+
+			})
+		} else
+
+			db.Snippet.findAll({}).then(snips => {
+				res.json(snips);
+			})
 	});
 
 
-	app.delete("/api/bundles/:id", (req, res)=>{
-		db.Bundle.destroy({
-			where: {
-				id: req.params.id
-			}
-		}).then(dbBundle=>{
-			console.log(dbBundle);
-			res.json(dbBundle)
-		}).catch(err =>{
-			console.error(err);
-			res.json(err);
-		});
-	});
+	app.post("/snippet", (req, res)=>{
+		db.Snippet.create(req.body).then(dbSnippet => {
 
-	app.get("/api/snippets", (req, res)=>{
-		var query = {};
-		if(req.query.bundle_id){
-			query.BundleId = req.query.bundle_id;
-		}
-
-		db.Snippet.findAll({
-			include: [db.Bundle],
-			where: query
-		}).then(dbSnippet=>res.json(dbSnippet));
-	});
-
-	app.get("/api/snippets/:id", (req, res)=>{
-		db.Snippet.findOne({
-			include: [db.Bundle],
-			where: {
-				id: req.params.id
-			}
-		}).then(dbSnippet=>{
-			console.log(sbSnippet)
-			res.json(dbSnippet)
-		}).catch(err=>{
-			console.error(err);
-			res.json(err);
-		});
-	});
-
-	app.post("api/snippets", (req, res)=>{
-
-		db.Snippet.create(req.body).then(dbSnippet=>{
 			console.log(dbSnippet);
 			res.json(dbSnippet);
-		}).catch(err=>{
+
+		}).catch(err => {
+
 			console.error(err);
 			res.json(err);
 		});
-
 	});
 
-	app.delete("/api/snippets/:id", (req, res)=>{
+	app.delete("/snippet/:id", (req, res) => {
 		db.Snippet.destroy({
 			where: {
 				id: req.params.id
