@@ -30,9 +30,22 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.STRING,
 			allowNull: false
 		}
+<<<<<<< HEAD
+	}, {
+		classMethods: {
+			associate: function(models){
+				Snippet.belongsTo(models.Bundle, {
+					foreignKey: {
+						allowNull: false
+					}
+				});
+			}
+		}
+=======
 	},
 	{
 		timestamps: false
+>>>>>>> master
 	});
 	return Snippet;
 }
