@@ -3,7 +3,7 @@ $(document).ready(function() {
     var library = {
         Front: {
             html: {
-                default: ['Standard (html)']
+                default: ['html']
             },
             css: {
                 cdn: ['Bootstrap', 'MDL', 'Skeleton', 'Bulma'],
@@ -129,10 +129,10 @@ $(document).ready(function() {
         $('.preview-pane').empty();
         $('.preview').toggle();
 
-        // $.post('/', roadmap).done(function() {
-        //     console.log('Success');
-
-            $.each(testObj, function(key, value) {
+        $.post('/', roadmap).done(function(object) {
+            console.log('Success');
+            console.log(object);
+            $.each(object, function(key, value) {
                 var newPanel = $('<div>').attr('class', 'preview-box panel panel-primary');
                 var panelHead = $('<div>').attr('class', 'panel-heading').html(key);
                 var panelBody = $('<div>').attr('class', 'panel-body');
@@ -144,7 +144,7 @@ $(document).ready(function() {
 
                 $('.preview-pane').append(newPanel);
             })
-        // })
+        })
 
 
     })
@@ -167,15 +167,6 @@ $(document).ready(function() {
               window.location = msg;
             }
         });
-    })
-
-
-
-    $(document).on('click', '.download-button', function(event) {
-        event.preventDefault();
-        $.post('/', roadmap).done(function() {
-            console.log('Success');
-        })
     })
 
 
