@@ -109,7 +109,8 @@ $(document).ready(function() {
     })
 
     $(document).on('change', 'form', function() {
-        var choices = $(this).serializeArray();
+        roadmap = {};
+        var choices = $('.tiers-form').serializeArray();
         for (var i = 0; i < choices.length; i++) {
             roadmap[choices[i].value.toLowerCase().replace(/\s/g, '')] = true;
         }
