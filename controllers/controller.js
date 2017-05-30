@@ -39,8 +39,6 @@ var router = function(app){
 
 		writer.writeZipFile(obj, function() {
 
-		  console.log('Zip file written.');
-
 			var msg = '/zips/files.zip';
 
 			res.send(msg);
@@ -71,6 +69,34 @@ var router = function(app){
 				console.log(snip);
 
 				res.render('update', { 'snippets': snip} );
+
+			})
+		}
+	});
+
+	app.get("/template/:id?", (req, res) => {
+		console.log('template id route hit...');
+
+		if(!req.params.id) {
+
+			db.Template.findAll({
+				order: [['id', 'DESC']]
+			}).then(temps => {
+
+				res.render('createtemplate', { 'templates': temps  });
+
+			})
+		} else {
+
+			db.Snippet.findAll({
+					order: [['id', 'DESC']],
+				where: {
+					id: req.params.id
+				}
+			}).then(temp => {
+				console.log(snip);
+
+				res.render('createtemplate', { 'templates': temp} );
 
 			})
 		}
