@@ -181,20 +181,20 @@ $(document).ready(function() {
 
     $(document).on('click', '.cancel-add', function() {
         $('#row-add').hide();
-        $('#row-name-add').html('');
-        $('#row-template-add').html('');
-        $('#row-marker-add').html('');
-        $('#row-snip-add').html('');
+        $('#row-name-add').text('');
+        $('#row-template-add').text('');
+        $('#row-marker-add').text('');
+        $('#row-snip-add').text('');
     })
 
 
     $(document).on('click', '.create', function(event) {
 
       var newSnip = {
-        name: $('#row-name-add').html(),
-        template: $('#row-template-add').html(),
-        marker: $('#row-marker-add').html(),
-        snippet_text: $('#row-snip-add').html()
+        name: $('#row-name-add').text(),
+        template: $('#row-template-add').text(),
+        marker: $('#row-marker-add').text(),
+        snippet_text: $('#row-snip-add').text()
       }
 
       console.log(newSnip);
@@ -247,10 +247,10 @@ $(document).ready(function() {
 
         var obj = {
           id: id,
-          name: $('#row-name-' + id).html(),
-          template: $('#row-template-' + id).html(),
-          marker: $('#row-marker-' + id).html(),
-          snippet_text: $('#row-snip-' + id).html()
+          name: $('#row-name-' + id).text(),
+          template: $('#row-template-' + id).text(),
+          marker: $('#row-marker-' + id).text(),
+          snippet_text: $('#row-snip-' + id).text()
         }
 
         console.log(obj);
@@ -278,10 +278,10 @@ $(document).ready(function() {
 
           var snip = $('<text>').text(res[0].snippet_text);
 
-          $('#row-name-' + id).html( res[0].name );
-          $('#row-template-' + id).html( res[0].template );
-          $('#row-marker-' + id).html( res[0].marker );
-          $('#row-snip-' + id).html(snip);
+          $('#row-name-' + id).text( res[0].name );
+          $('#row-template-' + id).text( res[0].template );
+          $('#row-marker-' + id).text( res[0].marker );
+          $('#row-snip-' + id).text(snip);
         });
 
     });
