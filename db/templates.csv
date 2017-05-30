@@ -1,0 +1,12 @@
+"id";"name";"family";"text";"path";"filename"
+1;"html";"html";"<!DOCTYPE html><html><head><title>{--title--}</title>{--style--}{--script--}</head><body>{--html--}</body></html>";"/public";"index.html"
+2;"node";"node";"//--- node.js dependencies ---
+
+{--require--}
+
+//--- code begin ---
+
+{--nodecode--}";"/";"server.js"
+3;"css";"css";"{--css--}";"/public/assets/css";"style.css"
+4;"js";"js";"{--js--}";"/public/assets/javascript";"index.js"
+5;"package_json";"node";"{""name"":"""",""version"":""1.0.0"",""description"":"""",""main"":"""",""scripts"":{""test"":""echo\""Error:notestspecified\""&&exit1""},""repository"":{""type"":"""",""url"":""""},""author"":"""",""license"":"""",""bugs"":{""url"":""""},""homepage"":"""",""dependencies"":{{--package--}}}";"/";"package.json"
