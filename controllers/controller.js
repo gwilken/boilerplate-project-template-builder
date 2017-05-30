@@ -96,10 +96,11 @@ var router = function(app){
 		});
 	});
 
-	app.post("api/snippets", (req, res)=>{
-
+	app.post("/api/snippets", (req, res)=>{
 		db.Snippet.create(req.body).then(dbSnippet=>{
+			console.log("-----------------------");
 			console.log(dbSnippet);
+			console.log("-----------------------");
 			res.json(dbSnippet);
 		}).catch(err=>{
 			console.error(err);
