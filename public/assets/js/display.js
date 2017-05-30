@@ -185,29 +185,70 @@ $(document).ready(function() {
     })
 
 
+    // EDIT SNIPPETS TABLE
+
+
     $(document).on('click', '.edit', function(event) {
-        event.preventDefault();
+      //  event.preventDefault();
 
         var id = event.target.value;
+
+        $('#row-' + id).children().css('color', 'red');
 
         $('#row-' + id).attr('contenteditable', 'true');
         $('#row-edit-' + id).css('display', 'none');
         $('#row-save-' + id).css('display', 'initial');
         $('#row-cancel-' + id).css('display', 'initial');
-    })
+    });
 
-    $(document).on('click', '.cancel', function(event) {
-        event.preventDefault();
+
+    $(document).on('click', '.save', function(event) {
+        //event.preventDefault();
 
         var id = event.target.value;
 
+        $('#row-' + id).children().css('color', 'black');
         $('#row-' + id).attr('contenteditable', 'false');
+
         $('#row-edit-' + id).css('display', 'initial');
         $('#row-save-' + id).css('display', 'none');
         $('#row-cancel-' + id).css('display', 'none');
+
+        var obj = {
+          id: id,
+          name: $('#row-name-' + id).html(),
+          template: $('#row-template-' + id).html(),
+          marker: $('#row-marker-' + id).html(),
+          snippet_text: $('#row-snip-' + id).html()
+        }
+
+        console.log(obj);
     })
 
 
+    $(document).on('click', '.cancel', function(event) {
+      //  event.preventDefault();
+
+        var id = event.target.value;
+
+        $('#row-' + id).children().css('color', 'black');
+        $('#row-' + id).attr('contenteditable', 'false');
+
+        $('#row-edit-' + id).css('display', 'initial');
+        $('#row-save-' + id).css('display', 'none');
+        $('#row-cancel-' + id).css('display', 'none');
+
+        $.get('/snipjson', {id: id}, function(res) {
+
+          var snip = $('<text>').text(res[0].snippet_text);
+
+          $('#row-name-' + id).html( res[0].name );
+          $('#row-template-' + id).html( res[0].template );
+          $('#row-marker-' + id).html( res[0].marker );
+          $('#row-snip-' + id).html(snip);
+        });
+
+    });
 
 
     //LOGINS

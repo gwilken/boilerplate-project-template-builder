@@ -72,6 +72,33 @@ var router = function(app){
 
 	});
 
+	app.get("/snipjson", (req, res) => {
+		console.log('snippet json route hit...');
+
+		if(!req.query.id) {
+
+			db.Snippet.findAll({}).then(snips => {
+
+				res.json(snips);
+
+			})
+		} else {
+
+			db.Snippet.findAll({
+				where: {
+					id: req.query.id
+				}
+			}).then(snip => {
+				console.log(snip);
+
+				res.json(snip);
+
+			})
+		}
+
+	});
+
+
 	app.get("/edit/:id?", (req, res) => {
 		console.log('snippet edit route hit...');
 
