@@ -2,13 +2,6 @@ CREATE DATABASE boilerplate_db;
 
 USE boilerplate_db;
 
-CREATE TABLE bundles(
-	id INTEGER AUTO_INCREMENT NOT NULL,
-	name VARCHAR(50) NOT NULL,
-	dependency INTEGER,
-	primary key(id)
-);
-
 CREATE TABLE snippets(
 	id INTEGER NOT NULL,
 	type VARCHAR(50),
