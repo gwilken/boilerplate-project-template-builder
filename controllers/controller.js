@@ -16,24 +16,21 @@ var router = function(app){
 	});
 
 	app.post("/", (req, res) => {
-		var obj = req.body;
-		console.log(obj);
-		var args = builder.parseOptions(obj);
 
-		builder.build(args, function(data) {
+		builder.parseOptions(req.body, function(args) {
 
-		  builder.scrubMarkers(data, function(result) {
+			builder.build(args, function(data) {
 
-		    builder.beautify(result, function(resp) {
+		  	builder.scrubMarkers(data, function(result) {
 
-					res.send(resp);
+		    	builder.beautify(result, function(resp) {
 
-					obj = {};
-					args = [];
+						res.send(resp);
 
-		    })
-		  })
-		})
+		    	})
+		  	})
+			})
+		});
 	});
 
 	app.post("/zip", (req, res) => {

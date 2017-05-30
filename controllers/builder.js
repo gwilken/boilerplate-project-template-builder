@@ -7,17 +7,14 @@ var beautify_html = require('js-beautify').html;
 
 var builder = {
 
-  userOptions: [],
-
   parseOptions: function(obj, cb) {
-      for(var key in obj) {
-        this.userOptions.push(key);
+    var userOptions = [];
 
-          if (typeof obj[key] === 'object') {
-              this.parseOptions( obj[key] );
-          }
-      }
-    return this.userOptions;
+      for(var key in obj) {
+          userOptions.push(key);
+        }
+
+    cb(userOptions);
   },
 
   build: function(arr, cb) {
@@ -63,11 +60,9 @@ var builder = {
               count++;
 
               if(count === countLength ) {
-                  var response = workingTemplates;
-                  workingTemplates = {};
-                  this.userOptions = [];
-                cb(response);
-                return;
+
+                cb(workingTemplates);
+
               }
             })
           })
