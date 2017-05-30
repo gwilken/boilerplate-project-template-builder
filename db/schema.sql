@@ -5,7 +5,7 @@ USE boilerplate_db;
 CREATE TABLE bundles(
 	id INTEGER AUTO_INCREMENT NOT NULL,
 	name VARCHAR(50) NOT NULL,
-	dependency INTEGER,
+	dependency VARCHAR(50),
 	primary key(id)
 );
 
@@ -20,5 +20,3 @@ CREATE TABLE snippets(
 	PRIMARY KEY(id),
     FOREIGN KEY(BundleId) references bundles(id)
 );
-
-SELECT * FROM bundles;

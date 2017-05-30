@@ -55,7 +55,7 @@ var write = {
 
           if(count === keyCount) {
             zip.writeZip( path.join( __dirname, '../public/zips/files.zip') );
-            cb();
+            cb(zip);
           }
         });
       });

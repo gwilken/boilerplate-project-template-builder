@@ -1,7 +1,5 @@
 module.exports = function(sequelize, DataTypes)	{
-
 	var Bundle = sequelize.define("Bundle", {
-
 		id: {
 			type: DataTypes.INTEGER,
 			autoIncrement: true,
@@ -14,14 +12,17 @@ module.exports = function(sequelize, DataTypes)	{
 			unique: true
 		},
 		dependency_id: {
-			type: DataTypes.STRING,
+			type: DataTypes.INTEGER,
 			allowNull: true
 		}
-	},
-	{
-		timestamps: false
+	}, {
+		classMethods: {
+			associate: function(models){
+				Bundle.hasMany(models.Snippet, {
+					onDelete: "cascade"
+				});
+			}
+		}
 	});
-
 	return Bundle;
-
 }
