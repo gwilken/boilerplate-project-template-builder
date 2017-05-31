@@ -256,8 +256,8 @@ $(document).ready(function() {
           id: id,
           name: $('#row-name-' + id).text(),
           template: $('#row-template-' + id).text(),
-          stack: $('#row-marker-' + id).text(),
-          category: $('#row-marker-' + id).text(),
+          stack: $('#row-stack-' + id).text(),
+          category: $('#row-category-' + id).text(),
           marker: $('#row-marker-' + id).text(),
           snippet_text: $('#row-snip-' + id).text()
         }
