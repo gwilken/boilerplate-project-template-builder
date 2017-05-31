@@ -180,6 +180,10 @@ input[type=checkbox] {
     padding-left: 30px;
 }
 
+.preview {
+    padding-bottom: 50px;
+}
+
 .preview-pane {
     width: 100%;
     /*border: 3px solid gray;*/
