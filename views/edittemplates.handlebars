@@ -1,8 +1,6 @@
 
 <div class="mdl-grid">
 
-
-
   <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
 
     <caption><h2>View Templates</h2></caption>
@@ -14,7 +12,7 @@
         <!-- <th class="mdl-data-table__cell--non-numeric">Text</th> -->
         <th class="mdl-data-table__cell--non-numeric">Path</th>
         <th class="mdl-data-table__cell--non-numeric">Filename</th>
-        <td> <button id='row-edit-add' class="mdl-button mdl-js-button mdl-button--raised add">Add</button> </td>
+        <td> <button id='row-edit-add' class="mdl-button mdl-js-button mdl-button--raised temp-add">Add</button> </td>
       </tr>
     </thead>
 
@@ -27,9 +25,7 @@
         <!-- <td id='temp-row-template-{{this.id}}' class="mdl-data-table__cell--non-numeric">{{this.text}}</td> -->
         <td id='temp-row-stack-{{this.id}}' class="mdl-data-table__cell--non-numeric">{{this.path}}</td>
         <td id='temp-row-category-{{this.id}}' class="mdl-data-table__cell--non-numeric">{{this.filename}}</td>
-        <td><button id='temp-row-edit-{{this.id}}' class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored edit" value={{this.id}}>Edit</button>
-        <button id='temp-row-delete-{{this.id}}' class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored delete" value={{this.id}}>Delete</button></td>
-
+        <td><button id='temp-row-edit-{{this.id}}' class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored temp-edit" value={{this.id}}>Edit</button>
       </tr>
 
       {{/each}}

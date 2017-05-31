@@ -122,13 +122,12 @@ var router = function(app){
 	});
 
 	app.get("/template", function(req, res) {
-
 		res.render('createtemplate');
-
 	});
 
+
 	app.get("/edittemplate/:id?", (req, res) => {
-		console.log('template id route hit...');
+		console.log('edit template id route hit...');
 
 		if(!req.params.id) {
 
@@ -136,7 +135,7 @@ var router = function(app){
 				order: [['id', 'DESC']]
 			}).then(templates => {
 
-				res.render('edittemplate', { 'templates': templates  });
+				res.render('edittemplates', { 'templates': templates  });
 
 			})
 		} else {
@@ -148,11 +147,32 @@ var router = function(app){
 				}
 			}).then(template => {
 
-				res.render('edittemplate', { 'templates': template} );
+				res.render('editsingletemplate', { 'templates': template} );
 
 			})
 		}
 	});
+
+	app.post("/updatetemplate", function(req, res) {
+
+		db.Template.update(
+			req.body,
+			{
+				where: {
+					id: req.body.id
+				}
+			}).then(template => {
+
+				res.json(template);
+
+			}).catch(err=>{
+
+				console.error(err);
+				res.json(err);
+
+			});
+
+	})
 
 	app.get("/snipjson", (req, res) => {
 		console.log('snippet json route hit...');
