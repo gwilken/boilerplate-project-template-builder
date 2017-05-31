@@ -163,7 +163,7 @@ var router = function(app){
 				}
 			}).then(template => {
 
-				res.json(template);
+				res.redirect("/edittemplate");
 
 			}).catch(err=>{
 
