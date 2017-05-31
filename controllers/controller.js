@@ -98,16 +98,22 @@ var router = function(app){
 		}
 	});
 
-	app.get("/template/:id?", (req, res) => {
+	app.get("/template", function(req, res) {
+
+		res.render('createtemplate');
+
+	});
+
+	app.get("/edittemplate/:id?", (req, res) => {
 		console.log('template id route hit...');
 
 		if(!req.params.id) {
 
 			db.Template.findAll({
 				order: [['id', 'DESC']]
-			}).then(snips => {
+			}).then(templates => {
 
-				res.render('createtemplate', { 'templates': snips  });
+				res.render('edittemplate', { 'templates': templates  });
 
 			})
 		} else {
@@ -117,10 +123,9 @@ var router = function(app){
 				where: {
 					id: req.params.id
 				}
-			}).then(snip => {
-				console.log(snip);
+			}).then(template => {
 
-				res.render('createtemplate', { 'templates': snip} );
+				res.render('edittemplate', { 'templates': template} );
 
 			})
 		}
@@ -189,7 +194,7 @@ var router = function(app){
 		console.log(req.body);
 
 		db.Template.create(req.body).then(temp => {
-		
+
 			res.json(temp);
 
 		}).catch(err => {
