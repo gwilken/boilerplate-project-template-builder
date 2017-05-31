@@ -186,6 +186,8 @@ $(document).ready(function() {
         $('#row-add').hide();
         $('#row-name-add').text('');
         $('#row-template-add').text('');
+        $('#row-stack-add').text('');
+        $('#row-category-add').text('');
         $('#row-marker-add').text('');
         $('#row-snip-add').text('');
     })
@@ -196,6 +198,8 @@ $(document).ready(function() {
       var newSnip = {
         name: $('#row-name-add').text(),
         template: $('#row-template-add').text(),
+        stack: $('#row-stack-add').text(),
+        category: $('#row-category-add').text(),
         marker: $('#row-marker-add').text(),
         snippet_text: $('#row-snip-add').text()
       }
@@ -252,6 +256,8 @@ $(document).ready(function() {
           id: id,
           name: $('#row-name-' + id).text(),
           template: $('#row-template-' + id).text(),
+          stack: $('#row-marker-' + id).text(),
+          category: $('#row-marker-' + id).text(),
           marker: $('#row-marker-' + id).text(),
           snippet_text: $('#row-snip-' + id).text()
         }
@@ -283,6 +289,8 @@ $(document).ready(function() {
 
           $('#row-name-' + id).text( res[0].name );
           $('#row-template-' + id).text( res[0].template );
+          $('#row-stack-' + id).text( res[0].stack );
+          $('#row-category-' + id).text( res[0].category );
           $('#row-marker-' + id).text( res[0].marker );
           $('#row-snip-' + id).text(snip);
         });
