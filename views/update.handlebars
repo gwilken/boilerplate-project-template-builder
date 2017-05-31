@@ -22,7 +22,7 @@
 
       <tr id='row-add'>
         <td id='row-name-add' class="mdl-data-table__cell--non-numeric" contenteditable="true"></td>
-        <td id='row-template-add' class="mdl-data-table__cell--non-numeric" contenteditable="true">
+        <td id='row-template-add' class="mdl-data-table__cell--non-numeric" contenteditable="false">
             <input type="text" list="template" />
             <datalist id="template">
             {{#each templates}}
@@ -30,7 +30,7 @@
             {{/each}}
             </datalist>
         </td>
-        <td id='row-stack-add' class="mdl-data-table__cell--non-numeric" contenteditable="true">
+        <td id='row-stack-add' class="mdl-data-table__cell--non-numeric" contenteditable="false">
             <input type="text" list="stack" />
             <datalist id="stack">
                 {{#each stacks}}
@@ -38,7 +38,7 @@
                 {{/each}}
             </datalist>
         </td>
-        <td id='row-category-add' class="mdl-data-table__cell--non-numeric" contenteditable="true">
+        <td id='row-category-add' class="mdl-data-table__cell--non-numeric" contenteditable="false">
             <input type="text" list="category" />
             <datalist id="category">
                 {{#each categories}}
