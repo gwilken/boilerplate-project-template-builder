@@ -5,7 +5,6 @@ var writer = require('../controllers/writer.js');
 var zipper = require('../controllers/zipper.js');
 var path = require('path');
 
-//var template = require("./templates.js");
 
 var router = function(app){
 
@@ -170,6 +169,21 @@ var router = function(app){
 		});
 	});
 
+	app.post("/template", (req, res) => {
+
+		console.log(req.body);
+
+		db.Template.create(req.body).then(temp => {
+		
+			res.json(temp);
+
+		}).catch(err => {
+
+			console.error(err);
+			res.json(err);
+		});
+
+	});
 
 	app.delete("/snippet/:id", (req, res) => {
 		db.Snippet.destroy({
