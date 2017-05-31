@@ -115,14 +115,14 @@ var builder = {
 
               templates[templateKey] = res;
 
-            })
+            });
         }
      }
      cb( templates );
    },
 
   scrubMarkers: function(buffer, cb) {
-    var re = new RegExp( '{--[a-zA-Z\d\s]*--}', 'g' );
+    var re = new RegExp( '(,(\r?\n?\t* *)*)?{--[a-zA-Z\d\s]*--}', 'g' );
 
     for(var keys in buffer) {
 
