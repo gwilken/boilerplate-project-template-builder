@@ -1,0 +1,31 @@
+
+<div id="form-container">
+    <form action="/updatetemplate" method="POST">
+
+
+      <h2>Edit Template</h2>
+
+        <div class="form-group">
+
+          {{#each templates}}
+
+          <label for="name">Name:</label>
+          <input placeholder="{{name}}" type="text" class="form-control" name="name" id="templateName">
+          <br />
+          <label for="text">Text:</label>
+          <textarea placeholder="{{text}}" class="form-control" rows="10" name="text" id="templateText"></textarea>
+          <br />
+          <label for="marker">Path:</label>
+          <input placeholder="{{path}}" type="text" class="form-control" name="path" id="templatePath">
+          <br />
+          <label for="template">Filename:</label>
+          <input placeholder="{{filename}}" type="text" class="form-control" name="filename" id="templateFile">
+          <br />
+          <button type="submit" class="btn btn-success submit">Save</button>
+
+          {{/each}}
+
+        </div>
+
+      </form>
+</div>

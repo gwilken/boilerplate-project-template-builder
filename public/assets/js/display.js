@@ -297,7 +297,19 @@ $(document).ready(function() {
 
     });
 
+    //EDIT templates
 
+      $(document).on('click', '.temp-edit', function(event) {
+
+        var id = event.target.value;
+
+        window.location.href = '/edittemplate/'+ id;
+
+      });
+
+      $(document).on('click', '.temp-add', function(event) {
+        window.location.href = '/template';
+      });
 
     //LOGINS
 
