@@ -48,9 +48,13 @@ $(document).ready(function() {
 //     })
 // }
 
-    function start() {
+    $.get('/tree', function(tree) {
+        start(tree);
+    })
 
-        $.each(library, function(category, object) {
+    function start(tree) {
+
+        $.each(tree, function(category, object) {
 
             var option = $('<input>').attr('type', 'checkbox').attr('id', count).attr('class', 'checkbox').attr('name', category).attr('value', category);
             var optionLabel = $('<label>').attr('class', 'toggle-button option btn btn-info').attr('for', count).html(category);
@@ -95,8 +99,7 @@ $(document).ready(function() {
 
     }
 
-    start();
-
+    // start();
 
 
     $(document).on('click', '.toggle-button', function() {
