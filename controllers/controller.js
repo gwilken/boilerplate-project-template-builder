@@ -61,13 +61,28 @@ var router = function(app){
 
 		if(!req.params.id) {
 
-			db.Snippet.findAll({
-				order: [['id', 'DESC']]
-			}).then(snips => {
+				db.Snippet.findAll({
+					order: [['id', 'DESC']]
+				}).then(snips => {
 
-				res.render('update', { 'snippets': snips  });
+					var templates = [];
+					var obj = {};
+					for (var i = 0; i < snips.length; i++) {
+						var index = snips[i]['dataValues'].template;
+						if (!obj[index]) {
+							templates.push({template:snips[i]['dataValues'].template});
+							obj[index] = true;
+						}
+					}
 
-			})
+					console.log(templates);
+
+					// console.log(snips);
+					res.render('update', { 'snippets': snips, 'templates': templates });
+
+
+				})
+
 		} else {
 
 			db.Snippet.findAll({
