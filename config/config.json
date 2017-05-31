@@ -1,11 +1,7 @@
 {
   "development": {
     "username": "root",
-<<<<<<< HEAD
     "password": "violet",
-=======
-    "password": "Sdfjkl3ed",
->>>>>>> 73d09d73fdd2d65c271799a130002d564118500d
     "database": "boilerplate_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
