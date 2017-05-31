@@ -5,30 +5,73 @@ var zipper = require('../controllers/zipper.js');
 var db = require('../models');
 var beautify = require('js-beautify').html;
 
-var obj = {
-      skeleton: true,
-      // bootstrap: true,
-       jquery: true,
-      // express: true,
-      // css_reset: true
-    };
+
+    db.Snippet.findAll({
+    }).then(function(docs) {
+
+      var obj = {};
+      var arr = [];
+
+      docs.forEach(function(element) {
+
+        if(! obj[element.stack] ) {
+          obj[element.stack] = {};
+        }
+
+        if (! obj[element.stack][element.template] ) {
+            obj[element.stack][element.template] = {};
+          }
+
+          if(! obj[element.stack][element.template][element.category]) {
+              obj[element.stack][element.template][element.category] = [];
+            }
 
 
-var args = builder.parseOptions(obj);
+            if(! obj[element.stack][element.template][element.category].includes(element.name) ) {
 
-builder.build(args, function(data) {
+              obj[element.stack][element.template][element.category].push(element.name);
 
-  builder.scrubMarkers(data, function(result) {
+            }
 
-    builder.beautify(result, function(res) {
-
-      writer.writeZipFile(res, function() {
-        console.log('Zip file written.');
       });
 
-    })
-  })
-})
+      console.log(JSON.stringify(obj, null, 2));
+      console.log(arr);
+
+
+    });
+
+
+    //
+    //     if( !obj[element.stack] ) obj[element.stack] =
+    //
+    //     var category = element.category;
+    //
+    //       category.push(element.name);
+    //
+    //     [element.template] =
+    //
+    //   });
+    //
+    //   console.log(obj);
+    // });
+
+
+// var args = builder.parseOptions(obj);
+
+// builder.build(args, function(data) {
+//
+//   builder.scrubMarkers(data, function(result) {
+//
+//     builder.beautify(result, function(res) {
+//
+//       writer.writeZipFile(res, function() {
+//         console.log('Zip file written.');
+//       });
+//
+//     })
+//   })
+// })
 
 
 // var options = {

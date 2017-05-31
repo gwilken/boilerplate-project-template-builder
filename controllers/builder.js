@@ -7,6 +7,39 @@ var beautify_html = require('js-beautify').html;
 
 var builder = {
 
+  buildOptionsTree: function(cb) {
+    db.Snippet.findAll({
+    }).then(function(docs) {
+
+      var obj = {};
+
+      docs.forEach(function(element) {
+
+        if(! obj[element.stack] ) {
+          obj[element.stack] = {};
+        }
+
+        if (! obj[element.stack][element.template] ) {
+            obj[element.stack][element.template] = {};
+          }
+
+          if(! obj[element.stack][element.template][element.category]) {
+              obj[element.stack][element.template][element.category] = [];
+            }
+
+
+            if(! obj[element.stack][element.template][element.category].includes(element.name) ) {
+
+              obj[element.stack][element.template][element.category].push(element.name);
+
+            }
+
+      });
+
+    cb(obj);
+    });
+  },
+
   parseOptions: function(obj, cb) {
     var userOptions = [];
 

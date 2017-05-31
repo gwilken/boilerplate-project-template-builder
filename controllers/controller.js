@@ -15,6 +15,14 @@ var router = function(app){
 
 	});
 
+	app.get("/tree", function(req, res) {
+		builder.buildOptionsTree(function(obj) {
+
+			res.json(obj);
+
+		})
+	})
+
 	app.post("/", (req, res) => {
 
 		builder.parseOptions(req.body, function(args) {
@@ -71,6 +79,34 @@ var router = function(app){
 				console.log(snip);
 
 				res.render('update', { 'snippets': snip} );
+
+			})
+		}
+	});
+
+	app.get("/template/:id?", (req, res) => {
+		console.log('template id route hit...');
+
+		if(!req.params.id) {
+
+			db.Template.findAll({
+				order: [['id', 'DESC']]
+			}).then(snips => {
+
+				res.render('createtemplate', { 'templates': snips  });
+
+			})
+		} else {
+
+			db.Template.findAll({
+					order: [['id', 'DESC']],
+				where: {
+					id: req.params.id
+				}
+			}).then(snip => {
+				console.log(snip);
+
+				res.render('createtemplate', { 'templates': snip} );
 
 			})
 		}

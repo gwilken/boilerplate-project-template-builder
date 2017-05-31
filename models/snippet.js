@@ -9,6 +9,14 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
+		stack: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
+		category: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
 		snippet_text: {
 			type: DataTypes.TEXT,
 			allowNull: false
