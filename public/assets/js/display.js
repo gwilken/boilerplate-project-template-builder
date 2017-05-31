@@ -197,9 +197,9 @@ $(document).ready(function() {
 
       var newSnip = {
         name: $('#row-name-add').text(),
-        template: $('#row-template-add').text(),
-        stack: $('#row-stack-add').text(),
-        category: $('#row-category-add').text(),
+        template: $('#row-template-add').find('input').val(),
+        stack: $('#row-stack-add').find('input').val(),
+        category: $('#row-category-add').find('input').val(),
         marker: $('#row-marker-add').text(),
         snippet_text: $('#row-snip-add').text()
       }
