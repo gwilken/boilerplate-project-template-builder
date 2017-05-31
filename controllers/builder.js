@@ -33,7 +33,6 @@ var builder = {
               obj[element.stack][element.template][element.category].push(element.name);
 
             }
-
       });
 
     cb(obj);
@@ -160,7 +159,13 @@ var builder = {
         break;
 
         case 'js':
+          obj[key] = beautify_js(obj[key]);
+        break;
+
         case 'package_json':
+          obj[key] = beautify_js(obj[key]);
+        break;
+
         case 'node':
            obj[key] = beautify_js(obj[key]);
         break;
