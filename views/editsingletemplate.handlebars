@@ -21,6 +21,9 @@
           <label for="template">Filename:</label>
           <input value="{{filename}}" type="text" class="form-control" name="filename" id="templateFile">
           <br />
+          <label for="template">Id:</label>
+          <input readonly value="{{id}}" type="text" class="form-control" name="id" id="templateId">
+          <br />
           <button type="submit" class="btn btn-success submit">Save</button>
 
           {{/each}}

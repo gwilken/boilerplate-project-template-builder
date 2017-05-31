@@ -155,6 +155,8 @@ var router = function(app){
 
 	app.post("/updatetemplate", function(req, res) {
 
+		console.log(req.body);
+
 		db.Template.update(
 			req.body,
 			{
