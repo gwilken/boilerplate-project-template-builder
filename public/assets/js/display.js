@@ -292,7 +292,7 @@ $(document).ready(function() {
           $('#row-stack-' + id).text( res[0].stack );
           $('#row-category-' + id).text( res[0].category );
           $('#row-marker-' + id).text( res[0].marker );
-          $('#row-snip-' + id).text(snip);
+          $('#row-snip-' + id).html(snip);
         });
 
     });
