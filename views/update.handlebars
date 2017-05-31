@@ -8,6 +8,8 @@
       <tr>
         <th class="mdl-data-table__cell--non-numeric">Name</th>
         <th class="mdl-data-table__cell--non-numeric">Template</th>
+        <th class="mdl-data-table__cell--non-numeric">Stack</th>
+        <th class="mdl-data-table__cell--non-numeric">Category</th>
         <th class="mdl-data-table__cell--non-numeric">Marker</th>
         <th class="mdl-data-table__cell--non-numeric">Snippet</th>
         <td> <button id='row-edit-add' class="mdl-button mdl-js-button mdl-button--raised add" contenteditable="true">Add</button> </td>
@@ -19,6 +21,8 @@
       <tr id='row-add'>
         <td id='row-name-add' class="mdl-data-table__cell--non-numeric" contenteditable="true"></td>
         <td id='row-template-add' class="mdl-data-table__cell--non-numeric" contenteditable="true"></td>
+        <td id='row-stack-add' class="mdl-data-table__cell--non-numeric" contenteditable="true"></td>
+        <td id='row-category-add' class="mdl-data-table__cell--non-numeric" contenteditable="true"></td>
         <td id='row-marker-add' class="mdl-data-table__cell--non-numeric markerrow" contenteditable="true"></td>
         <td id='row-snip-add' class="mdl-data-table__cell--non-numeric" contenteditable="true"></td>
         <td> <button id='row-edit-add' class="mdl-button mdl-js-button mdl-button--raised create" contenteditable="true">Save</button> <button id='row-edit-cancel' class="mdl-button mdl-js-button mdl-button--raised cancel-add" contenteditable="true">Cancel</button></td>
@@ -30,6 +34,8 @@
       <tr id='row-{{this.id}}'>
         <td id='row-name-{{this.id}}' class="mdl-data-table__cell--non-numeric">{{this.name}}</td>
         <td id='row-template-{{this.id}}' class="mdl-data-table__cell--non-numeric">{{this.template}}</td>
+        <td id='row-stack-{{this.id}}' class="mdl-data-table__cell--non-numeric">{{this.stack}}</td>
+        <td id='row-category-{{this.id}}' class="mdl-data-table__cell--non-numeric">{{this.category}}</td>
         <td id='row-marker-{{this.id}}' class="mdl-data-table__cell--non-numeric markerrow">{{this.marker}}</td>
         <td id='row-snip-{{this.id}}' class="mdl-data-table__cell--non-numeric">{{this.snippet_text}}</td>
         <td><button id='row-edit-{{this.id}}' class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored edit" value={{this.id}}>Edit</button>
