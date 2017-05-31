@@ -238,7 +238,7 @@ var router = function(app){
 
 		db.Template.create(req.body).then(temp => {
 
-			res.json(temp);
+			res.redirect("/edittemplate");
 
 		}).catch(err => {
 
