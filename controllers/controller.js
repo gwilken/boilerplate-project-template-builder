@@ -74,10 +74,33 @@ var router = function(app){
 						}
 					}
 
+					var stacks = [];
+					var obj1 = {};
+					for (var i = 0; i < snips.length; i++) {
+						var index = snips[i]['dataValues'].stack;
+						if (!obj1[index]) {
+							stacks.push({stack:snips[i]['dataValues'].stack});
+							obj1[index] = true;
+						}
+					}
+
+					var categories = [];
+					var obj2 = {};
+					for (var i = 0; i < snips.length; i++) {
+						var index = snips[i]['dataValues'].category;
+						if (!obj2[index]) {
+							categories.push({category:snips[i]['dataValues'].category});
+							obj2[index] = true;
+						}
+					}
+
 					console.log(templates);
+					console.log(stacks);
+					console.log(categories);
+
 
 					// console.log(snips);
-					res.render('update', { 'snippets': snips, 'templates': templates });
+					res.render('update', { 'snippets': snips, 'templates': templates, 'stacks': stacks, 'categories': categories });
 
 
 				})

@@ -22,9 +22,30 @@
 
       <tr id='row-add'>
         <td id='row-name-add' class="mdl-data-table__cell--non-numeric" contenteditable="true"></td>
-        <td id='row-template-add' class="mdl-data-table__cell--non-numeric" contenteditable="true"></td>
-        <td id='row-stack-add' class="mdl-data-table__cell--non-numeric" contenteditable="true"></td>
-        <td id='row-category-add' class="mdl-data-table__cell--non-numeric" contenteditable="true"></td>
+        <td id='row-template-add' class="mdl-data-table__cell--non-numeric" contenteditable="true">
+            <input type="text" list="template" />
+            <datalist id="template">
+            {{#each templates}}
+                <option>{{this.template}}</option>
+            {{/each}}
+            </datalist>
+        </td>
+        <td id='row-stack-add' class="mdl-data-table__cell--non-numeric" contenteditable="true">
+            <input type="text" list="stack" />
+            <datalist id="stack">
+                {{#each stacks}}
+                    <option>{{this.stack}}</option>
+                {{/each}}
+            </datalist>
+        </td>
+        <td id='row-category-add' class="mdl-data-table__cell--non-numeric" contenteditable="true">
+            <input type="text" list="category" />
+            <datalist id="category">
+                {{#each categories}}
+                    <option>{{this.category}}</option>
+                {{/each}}
+            </datalist>
+        </td>
         <td id='row-marker-add' class="mdl-data-table__cell--non-numeric markerrow" contenteditable="true"></td>
         <td id='row-snip-add' class="mdl-data-table__cell--non-numeric" contenteditable="true"></td>
         <td> <button id='row-edit-add' class="mdl-button mdl-js-button mdl-button--raised create" contenteditable="true">Save</button> <button id='row-edit-cancel' class="mdl-button mdl-js-button mdl-button--raised cancel-add" contenteditable="true">Cancel</button></td>
