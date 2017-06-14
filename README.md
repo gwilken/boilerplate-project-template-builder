@@ -8,5 +8,22 @@ The user can write and access saved templates and snippets. Snippets are small c
 
 The project was built with Bootstrap and Javascript on the front end. Node.js, Express with Handlebars, and a SQL database run the back of house.
 
+## Landing page
+Choose your own adventure!
 
-![frontpage](https://github.com/gwilken/boilerplate-project-template-builder/blob/master/images/bp-01.jpeg)
+![landingpage view](https://github.com/gwilken/boilerplate-project-template-builder/blob/master/images/bp-01.jpeg)
+
+## Preview
+Any changes made in the preview windows get reflected in the final zip file. Spiffy.
+
+![preview view](https://github.com/gwilken/boilerplate-project-template-builder/blob/master/images/bp-02.jpeg)
+
+## Edit and Add templates
+Sky's the limit.
+
+![templates edit view](https://github.com/gwilken/boilerplate-project-template-builder/blob/master/images/bp-04.jpeg)
+
+## Code Snippets editor
+Templates and snippets. Together we can do amazing things.
+
+![snippets edit view](https://github.com/gwilken/boilerplate-project-template-builder/blob/master/images/bp-05.jpeg)
