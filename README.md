@@ -1,4 +1,4 @@
-##Boilerplate - A Project Template Builder
+# Boilerplate - A Project Template Builder
 
 Boilerplate is front and backend app that quickly builds the run of the mill starter files we all hate to create for every project.
 
