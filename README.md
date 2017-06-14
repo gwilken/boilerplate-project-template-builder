@@ -7,3 +7,6 @@ It allows the user to quickly select the libraries and/or frameworks from a dyna
 The user can write and access saved templates and snippets. Snippets are small code blocks that are inserted into templates at the location of a custom marker. The application provides interfaces to edit and save to the database both new templates and snippets. Markers are written in "tie-fighter" notation. {--nodecode--}. See images below.
 
 The project was built with Bootstrap and Javascript on the front end. Node.js, Express with Handlebars, and a SQL database run the back of house.
+
+
+![frontpage](https://github.com/gwilken/boilerplate-project-template-builder/blob/master/images/bp-01.jpeg)
