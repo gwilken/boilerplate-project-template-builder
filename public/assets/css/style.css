@@ -180,6 +180,10 @@ input[type=checkbox] {
     padding-left: 30px;
 }
 
+.preview {
+    padding-bottom: 50px;
+}
+
 .preview-pane {
     width: 100%;
     /*border: 3px solid gray;*/
@@ -243,6 +247,8 @@ input[type=checkbox] {
     margin: 0 auto;
     border-bottom: 1px solid dimgray;
     border-radius: 5%;
+    display: flex;
+    justify-content: center;
 }
 
 
