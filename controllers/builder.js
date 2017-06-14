@@ -19,18 +19,17 @@ var builder = {
           obj[element.stack] = {};
         }
 
-        if (! obj[element.stack][element.template] ) {
-            obj[element.stack][element.template] = {};
+        if (! obj[element.stack][element.category] ) {
+            obj[element.stack][element.category] = {};
           }
 
-          if(! obj[element.stack][element.template][element.category]) {
-              obj[element.stack][element.template][element.category] = [];
+          if(! obj[element.stack][element.category][element.template]) {
+              obj[element.stack][element.category][element.template] = [];
             }
 
+            if(! obj[element.stack][element.category][element.template].includes(element.name) ) {
 
-            if(! obj[element.stack][element.template][element.category].includes(element.name) ) {
-
-              obj[element.stack][element.template][element.category].push(element.name);
+              obj[element.stack][element.category][element.template].push(element.name);
 
             }
       });
